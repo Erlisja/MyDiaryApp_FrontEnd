@@ -6,35 +6,33 @@ import LoginForm from "../components/LoginForm"
 
 function AuthenticationPage(props) {
 
-  const [isLogin, setIsLogin] = useState(true)
+const [signup, setSignup] = useState(true)
 
   function togglePage() {
-    setIsLogin(!isLogin)
+    setSignup(!signup)
   }
 
 
   return (
 
-    <>{isLogin ? (
-      <>
-        <LoginForm />
-        <br />
-        <h3>Don't have an account?</h3>
-        <button onClick={togglePage}>Sign Up</button>
-      </>
-    ) : (
-      <>
-        <h2>Sign Up </h2>
-        <SignUpForm />
-        <br />
+   <>
+   <>
+    {signup 
+    ?
+  <SignUpForm setUser={props.setUser} />
+  :
+  <LoginForm setUser={props.setUser} />
+    }
+  </>
+      
         <h3>Already have an account?</h3>
         <button onClick={togglePage}>Log In</button>
       </>
     )}
-    </>
-  )
+   
+
     
 
-}
+
 
 export default AuthenticationPage

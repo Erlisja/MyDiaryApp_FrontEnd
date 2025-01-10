@@ -1,8 +1,10 @@
 import { useState } from "react"
+import  userServices  from "../utilities/users-services"
 
 
 
-function LoginForm() {
+
+function LoginForm({setUser}) {
 
     //  create a state to store the form data
     const [formData, setFormData] = useState({
@@ -17,15 +19,22 @@ function LoginForm() {
         setError('');
     }
 
-    async function handleSubmit(e){
+    async function handleSubmit(e) {
         e.preventDefault();
+        // console.log(formData);
+        const credentials = { ...formData };
+        console.log(credentials);
         try{
-            console.log(formData);
-        }catch(error){
-            setError('An error occurred. Please try again');
+          // the promise returned by the login service method will resolve to the user object included in the payload of the JWT
+          const user = await userServices.login(credentials);
+          console.log(user);
+          setUser(user)
+    
         }
-
-    }
+        catch(err){
+          setError('login failed')
+        }
+      }
 
 
   return (
@@ -56,7 +65,7 @@ function LoginForm() {
             />
             <br />
             <br />
-            <button type="submit"  >Log In</button>
+            <button type="submit">Log In</button>
         </form>
         <p>{error}</p>
 
