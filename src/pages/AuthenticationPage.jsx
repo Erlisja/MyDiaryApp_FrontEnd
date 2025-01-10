@@ -1,16 +1,40 @@
-import React from 'react'
+import { useState } from "react"
+import { Link } from "react-router"
+import SignUpForm from "../components/SignUpForm"
+import LoginForm from "../components/LoginForm"
 
-function AuthenticationPage() {
+
+function AuthenticationPage(props) {
+
+  const [isLogin, setIsLogin] = useState(true)
+
+  function togglePage() {
+    setIsLogin(!isLogin)
+  }
+
+
   return (
 
-    <div>
-        <h2>Welcome to the My Diary App</h2>
-        <p>Please sign in to continue</p>
-        <button>Sign In</button>
-        <p>Don't have an account? Sign up here</p>
-        <button>Sign Up</button>
-      </div>
+    <>{isLogin ? (
+      <>
+        <LoginForm />
+        <br />
+        <h3>Don't have an account?</h3>
+        <button onClick={togglePage}>Sign Up</button>
+      </>
+    ) : (
+      <>
+        <h2>Sign Up </h2>
+        <SignUpForm />
+        <br />
+        <h3>Already have an account?</h3>
+        <button onClick={togglePage}>Log In</button>
+      </>
+    )}
+    </>
   )
+    
+
 }
 
 export default AuthenticationPage

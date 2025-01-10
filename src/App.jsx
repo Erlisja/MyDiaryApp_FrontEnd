@@ -9,11 +9,11 @@ import AuthenticationPage from "./pages/AuthenticationPage";
 import "./App.css";
 
 function App() {
-  const [user, setUser] = useState('user');
+  const [user, setUser] = useState('');
 
   return (
     <>
-      <h1>My Diary App</h1>
+      <h1>My Diary App </h1>
       {user ? (
         <>
           <NavBar />
