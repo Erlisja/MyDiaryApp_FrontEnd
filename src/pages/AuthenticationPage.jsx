@@ -1,38 +1,17 @@
-import { useState } from "react"
-import { Link } from "react-router"
-import SignUpForm from "../components/SignUpForm"
-import LoginForm from "../components/LoginForm"
+import { useState } from "react";
+import { Routes, Route } from "react-router";
+import WelcomePage from "./WelcomePage";
+import LoginForm from "../components/LoginForm";
+import SignUpForm from "../components/SignUpForm";
 
-
-function AuthenticationPage(props) {
-
-const [signup, setSignup] = useState(true)
-
-  function togglePage() {
-    setSignup(!signup)
-  }
-
-
+function AuthenticationPage({ setUser }) {
   return (
+    <Routes>
+      <Route path="/" element={<WelcomePage />} />
+      <Route path="/signup" element={<SignUpForm setUser={setUser} />} />
+      <Route path="/login" element={<LoginForm setUser={setUser} />} />
+    </Routes>
+  );
+}
 
-   <>
-   <>
-    {signup 
-    ?
-  <SignUpForm setUser={props.setUser} />
-  :
-  <LoginForm setUser={props.setUser} />
-    }
-  </>
-      
-        <h3>Already have an account?</h3>
-        <button onClick={togglePage}>Log In</button>
-      </>
-    )}
-   
-
-    
-
-
-
-export default AuthenticationPage
+export default AuthenticationPage;

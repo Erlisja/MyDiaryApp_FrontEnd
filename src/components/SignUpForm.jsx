@@ -1,5 +1,6 @@
 import { signUpUser } from "../utilities/users-services";
 import { useState } from "react";
+import { useNavigate } from "react-router";
 
 function SignUpForm(props) {
   //  create a state to store the form data
@@ -26,68 +27,82 @@ function SignUpForm(props) {
 
     try {
       const submitData = { ...formData };
-     delete formData.confirmPassword // deletes the confirmPassword key from the form data, so that it is not sent to the server
+      delete formData.confirmPassword; // deletes the confirmPassword key from the form data, so that it is not sent to the server
       console.log(submitData);
       const user = await signUpUser(submitData); // this line of code is used to call the signUpUser function from the users-api file
       props.setUser(user); // this line of code is used to set the user state to the user object returned by the signUpUser function
     } catch (error) {
       setError("An error occurred.- Please try again"); // this line of code is used to set the error message when an error occurs
+    }
+  };
+
+  const navigate = useNavigate();
+
+  function handleBack() {
+    navigate("/");
   }
-};
 
   return (
-    <div>
+    <>
       <div>
-        <form autoComplete="off" onSubmit={handleSubmit}>
-          <label for="username">Username</label>
-          <input
-            type="text"
-            name="username"
-            value={formData.username}
-            onChange={handleChange}
-            placeholder="Enter your username"
-            required
-          />
-          <br />
-          <label for="email">Email</label>
-          <input
-            type="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            placeholder="Enter your email"
-            required
-          />
-          <br />
-          <label for="password">Password</label>
-          <input
-            type="password"
-            name="password"
-            value={formData.password}
-            onChange={handleChange}
-            placeholder="Enter your password"
-            minLength={4}
-            required
-          />
-          <br />
-          <label for="password">Confirm Password</label>
-          <input
-            type="password"
-            name="confirmPassword"
-            value={formData.confirmPassword}
-            onChange={handleChange}
-            placeholder="Confirm your password"
-            minLength={4}
-            required
-          />
-          <br />
-          <br />
-          <button type="submit">Sign Up</button>
-          <br />
-        </form>
-        <p>{error}</p>
+        <button onClick={handleBack}>Back</button>
       </div>
-    </div>
+
+      <div>
+        <h2>Sign Up </h2>
+
+        <div>
+          <form autoComplete="off" onSubmit={handleSubmit}>
+            <label for="username">Username</label>
+            <input
+              type="text"
+              name="username"
+              value={formData.username}
+              onChange={handleChange}
+              placeholder="Enter your username"
+              required
+            />
+            <br />
+            <label for="email">Email</label>
+            <input
+              type="email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+              placeholder="Enter your email"
+              required
+            />
+            <br />
+            <label for="password">Password</label>
+            <input
+              type="password"
+              name="password"
+              value={formData.password}
+              onChange={handleChange}
+              placeholder="Enter your password"
+              minLength={4}
+              required
+            />
+            <br />
+            <label for="password">Confirm Password</label>
+            <input
+              type="password"
+              name="confirmPassword"
+              value={formData.confirmPassword}
+              onChange={handleChange}
+              placeholder="Confirm your password"
+              minLength={4}
+              required
+            />
+            <br />
+            <br />
+            <button type="submit">Sign Up</button>
+            <br />
+          </form>
+          <p>{error}</p>
+        </div>
+      </div>
+    </>
   );
 }
 
