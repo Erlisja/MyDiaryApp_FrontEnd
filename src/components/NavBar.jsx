@@ -21,7 +21,9 @@ function NavBar() {
       
         <Link to = '/'>Home</Link>
         &nbsp;|&nbsp;
-        <Link to='/diary'>Diary</Link>
+        <Link to='/daily-diary'>Diary</Link>
+        &nbsp;|&nbsp;
+        <Link to='/timeline'>Timeline</Link>
         &nbsp;|&nbsp;
         <Link to='/affirmations'>Affirmations</Link>
         &nbsp;|&nbsp;
