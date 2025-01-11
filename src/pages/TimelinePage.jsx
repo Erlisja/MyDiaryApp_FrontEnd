@@ -1,49 +1,73 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import List from '../components/DiaryEntryList';
+import { useEffect, useState } from "react";
+import {
+  getAllDiaryEntries,
+  deleteDiaryEntry,
+  updateDiaryEntry,
+} from "../utilities/diaryEntryService";
+import DiaryEntryList from "../components/DiaryEntryList";
 
 const TimelinePage = () => {
-  const [diaryEntries, setDiaryEntries] = useState([]);
-
-  const fetchEntries = async () => {
-    try {
-      const response = await axios.get('/diary-entries', {
-        headers: {
-          Authorization: `Bearer YOUR_AUTH_TOKEN`, // Replace with dynamic token
-        },
-      });
-      setDiaryEntries(response.data);
-    } catch (error) {
-      console.error('Error fetching diary entries:', error);
-    }
-  };
-
-  const deleteEntry = async (id) => {
-    try {
-      await axios.delete(`/diary-entries/${id}`, {
-        headers: {
-          Authorization: `Bearer YOUR_AUTH_TOKEN`, // Replace with dynamic token
-        },
-      });
-      setDiaryEntries((prevEntries) => prevEntries.filter((entry) => entry._id !== id));
-      alert('Entry deleted successfully!');
-    } catch (error) {
-      console.error('Error deleting entry:', error);
-    }
-  };
+  const [diaryEntries, setDiaryEntries] = useState([]); //state to store diary entries
+  const [error, setError] = useState(null); //state to handle errors
 
   useEffect(() => {
-    fetchEntries();
+    const fetchDiaryEntries = async () => {
+      try {
+        const entries = await getAllDiaryEntries();
+        console.log("Diary Entries:", entries);
+        setDiaryEntries(entries); // set the diary entries in the state variable to display them
+      } catch (error) {
+        console.log("Error getting diary entries:", error);
+        setError(error.message);
+      }
+    };
+    fetchDiaryEntries();
   }, []);
 
+  const deleteEntry = async (id) => {
+    if (window.confirm("Are you sure you want to delete this entry?")) {
+      try {
+        await deleteDiaryEntry(id); // call deleteDiaryEntry function to delete the entry from API
+        setDiaryEntries((prevEntries) =>
+          prevEntries.filter((entry) => entry._id !== id)
+        ); // remove the entry from the state variable
+      } catch (error) {
+        console.error("Error deleting diary entry:", error);
+        setError(error.message);
+        setTimeout(() => {
+          setError(null);
+        }, 5000);
+      }
+    }
+  };
+
+  const updateEntry = async (id, updatedData) => {
+    try {
+      const updatedEntry = await updateDiaryEntry(id, updatedData); // call updateDiaryEntry function to update the entry in the API
+      setDiaryEntries((prevEntries) =>
+        prevEntries.map((entry) =>
+          entry._id === id ? updatedEntry : entry
+        )
+      ); // update the entry in the state variable
+    } catch (error) {
+      console.error("Error updating diary entry:", error);
+      setError(error.message);
+      setTimeout(() => {
+        setError(null);
+      }, 5000);
+    }
+  }
+  
+
   return (
-    <div className="timeline-page">
-      <h1>Timeline</h1>
-      {diaryEntries.length === 0 ? (
-        <p>No entries found. Add your first diary entry!</p>
-      ) : (
-        <List entries={diaryEntries} onDelete={deleteEntry} />
-      )}
+    <div className="timeline">
+      <h1>Timeline Page</h1>
+      {error && <p className="error">{error}</p>}
+      <DiaryEntryList
+        entries={diaryEntries}
+        onDelete={deleteEntry}
+        onUpdate={updateEntry}
+      />
     </div>
   );
 };

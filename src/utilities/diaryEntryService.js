@@ -1,3 +1,4 @@
+// diaryEntryService.js is a utility file that contains functions to interact with the API to get, add, update, and delete diary entries.
 import axios from "axios";
 
 // set up the base URL for the API
@@ -7,19 +8,34 @@ const URL = LOCAL_URL + API_URL;
 
 // export the function to get all diary entries from the API
 export async function getAllDiaryEntries() {
-    const response = await fetch(URL, {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json'
+    try {
+        const token = localStorage.getItem('token'); // Retrieve token from localStorage
+        if (!token) {
+            throw new Error('No token found. Please log in.');
         }
-    })
-    // check if the response is OK
-    if (response.ok) {
-        return response.json();
-    } else {
-        throw new Error('An error occurred. Please try again');
+
+        const response = await fetch(URL, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`,
+            },
+        });
+
+        console.log('Response Status:', response.status);
+        if (response.ok) {
+            return await response.json();
+        } else {
+            const errorMessage = await response.text();
+            console.error('API Error:', errorMessage);
+            throw new Error('Failed to fetch diary entries: ' + response.statusText);
+        }
+    } catch (error) {
+        console.error('Fetch Error:', error.message);
+        throw error;
     }
 }
+
 
 
 // export the function to add a diary entry to the API
@@ -36,21 +52,32 @@ const addDiaryEntry = async (entryData) => {
     }
 };
 
-export default { addDiaryEntry };
+
 
 // export the function to delete a diary entry from the API
 export async function deleteDiaryEntry(id) {
-    const response = await fetch(URL + `/${id}`, {
-        method: 'DELETE',
-        headers: {
-            'Content-Type': 'application/json'
+    try {
+        const token = localStorage.getItem('token'); // Retrieve token from localStorage
+        if (!token) {
+            throw new Error('No token found. Please log in.');
         }
-    })
-    // check if the response is OK
-    if (response.ok) {
-        return response.json();
-    } else {
-        throw new Error('An error occurred. Please try again');
+        const response = await fetch(URL + `/${id}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`,
+            }
+        })
+        // check if the response is OK
+        if (response.ok) {
+            return response.json();
+        } else {
+            throw new Error('An error occurred. Please try again');
+        }
+    } catch (error) {
+        console.error('Fetch Error:', error.message);
+        throw new Error('Error deleting diary entry: ' + error.message);
+
     }
 }
 
@@ -87,3 +114,5 @@ export async function getDiaryEntry(id) {
     }
 }
 
+
+export default { addDiaryEntry };
