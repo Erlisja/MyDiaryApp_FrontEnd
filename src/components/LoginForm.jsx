@@ -10,12 +10,15 @@ function LoginForm({ setUser }) {
   });
 
   const [error, setError] = useState(""); // set the error message to an empty string
+  const navigate = useNavigate();
 
+  // create a function to handle the form data
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
     setError("");
   };
 
+  // create a function to handle the form submission
   async function handleSubmit(e) {
     e.preventDefault();
     // console.log(formData);
@@ -26,24 +29,24 @@ function LoginForm({ setUser }) {
       const user = await userServices.login(credentials);
       console.log(user);
       setUser(user);
+      navigate("/home");
     } catch (err) {
       setError("login failed");
     }
   }
 
-  const navigate = useNavigate();
-
+  // create a function to handle the back button
   function handleBack() {
     navigate("/");
   }
 
   return (
     <>
-      <div>
-        <button onClick={handleBack}>Back</button>
-      </div>
+    <div className="auth-page">
+      <div className="auth-card">
+        <button className="auth-back-arrow"  onClick={handleBack}>⬅︎</button>
       <h2>Login </h2>
-      <div>
+    
         <form autoComplete="off" onSubmit={handleSubmit}>
           <label>Email</label>
           <br />
@@ -72,6 +75,7 @@ function LoginForm({ setUser }) {
         </form>
         <p>{error}</p>
       </div>
+    </div>
     </>
   );
 }

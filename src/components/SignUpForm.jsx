@@ -44,14 +44,11 @@ function SignUpForm(props) {
 
   return (
     <>
-      <div>
-        <button onClick={handleBack}>Back</button>
-      </div>
+      <div className="auth-page">
+      <div className="auth-card">
+        <button className="auth-back-arrow"  onClick={handleBack}>⬅︎</button>
+      <h2>Sign Up </h2>
 
-      <div>
-        <h2>Sign Up </h2>
-
-        <div>
           <form autoComplete="off" onSubmit={handleSubmit}>
             <label for="username">Username</label>
             <input

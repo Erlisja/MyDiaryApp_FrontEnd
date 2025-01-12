@@ -82,37 +82,47 @@ export async function deleteDiaryEntry(id) {
 }
 
 // export the function to update a diary entry in the API
-export async function updateDiaryEntry(id, updatedEntry) {
-    const response = await fetch(URL + `/${id}`, {
-        method: 'PUT',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(updatedEntry) // convert the updated entry data to JSON
-    })
-    // check if the response is OK
-    if (response.ok) {
-        return response.json();
-    } else {
-        throw new Error('An error occurred. Please try again');
-    }
-}
-
-// export the function to get a single diary entry from the API
-export async function getDiaryEntry(id) {
-    const response = await fetch(URL + `/${id}`, {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json'
+export async function updateDiaryEntry(id, updatedData) {
+    try {
+        const response = await fetch(URL + `/${id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${localStorage.getItem('token')}`,
+            },
+            body: JSON.stringify(updatedData)
+        })
+        
+        if (response.ok) {
+            return response.json(); // Return the updated entry
+        } else {
+            throw new Error('An error occurred. Please try again');
         }
-    })
-    // check if the response is OK
-    if (response.ok) {
-        return response.json();
-    } else {
-        throw new Error('An error occurred. Please try again');
+    } catch (error) {
+        console.error('Fetch Error:', error.message);
+        throw new Error('Error updating diary entry: ' + error.message);
     }
 }
 
 
-export default { addDiaryEntry };
+
+
+
+    // export the function to get a single diary entry from the API
+    export async function getDiaryEntry(id) {
+        const response = await fetch(URL + `/${id}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        // check if the response is OK
+        if (response.ok) {
+            return response.json();
+        } else {
+            throw new Error('An error occurred. Please try again');
+        }
+    }
+
+
+    export default { addDiaryEntry };

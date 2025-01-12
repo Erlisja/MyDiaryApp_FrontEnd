@@ -3,11 +3,13 @@ import { Routes, Route } from "react-router";
 import { useState } from "react";
 import NavBar from "./components/NavBar";
 import WelcomePage from "./pages/WelcomePage";
-import DiaryPage from "./pages/DiaryPAge";
 import AuthenticationPage from "./pages/AuthenticationPage";
 import { getUser } from "./utilities/users-services";
 import TimelinePage from "./pages/TimelinePage";
 import DailyDiaryPage from "./pages/DailyDiaryPage";
+import HomePage from "./pages/HomePage";
+import LoginForm from "./components/LoginForm";
+import SignUpForm from "./components/SignUpForm";
 
 import "./App.css";
 
@@ -15,23 +17,21 @@ function App() {
   const [user, setUser] = useState(getUser());
   return (
     <>
-      <h1>My Diary App </h1>
       {user ? (
         <>
-          <NavBar />
-          <div>Welcome to your Diary {user.username}</div>
-
+         
           <Routes>
-  {/* <Route path="/diary" element={<DiaryPage />} /> */}
-  <Route path="/timeline" element={<TimelinePage />} />
-  <Route path="/daily-diary" element={<DailyDiaryPage />} />
-  {/* <Route path="/affirmations" element={<AffirmationsPage />} />
+            <Route path="/home" element={<HomePage />} />
+            <Route path="/timeline" element={<TimelinePage />} />
+            <Route path="/daily-diary" element={<DailyDiaryPage />} />
+            <Route path="/navbar" element={<NavBar />} />
+            <Route path="/login" element={<LoginForm setUser={setUser} />} />
+            <Route path="/signup" element={<SignUpForm setUser={setUser} />} />
+            {/* <Route path="/affirmations" element={<AffirmationsPage />} />
   <Route path="/goals" element={<GoalsPage />} />
   <Route path="/profile" element={<ProfilePage />} /> */}
-  <Route path="/" element={<WelcomePage />} />
-</Routes>
-
-
+            <Route path="/" element={<WelcomePage />} />
+          </Routes>
         </>
       ) : (
         <AuthenticationPage setUser={setUser} />

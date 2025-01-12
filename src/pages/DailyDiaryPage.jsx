@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { jwtDecode } from "jwt-decode";
 import diaryEntryService from "../utilities/diaryEntryService";
+import NavBar from "../components/NavBar";
 
 // Define the DailyDiaryPage component
 const DailyDiaryPage = () => {
@@ -58,6 +59,9 @@ const DailyDiaryPage = () => {
   };
 
   return (
+    <>
+    <NavBar layout={'horizontal'} />
+   
     <div className="diary-page">
       <h1>Add New Diary Entry</h1>
       <form onSubmit={handleSubmit}>
@@ -126,6 +130,7 @@ const DailyDiaryPage = () => {
         <button type="submit">Add Entry</button>
       </form>
     </div>
+    </>
   );
 };
 

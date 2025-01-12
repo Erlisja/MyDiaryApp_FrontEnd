@@ -1,14 +1,13 @@
 import { useEffect, useState } from "react";
-import {
-  getAllDiaryEntries,
-  deleteDiaryEntry,
-  updateDiaryEntry,
-} from "../utilities/diaryEntryService";
+import {getAllDiaryEntries,deleteDiaryEntry,updateDiaryEntry} from "../utilities/diaryEntryService";
 import DiaryEntryList from "../components/DiaryEntryList";
+import NavBar from "../components/NavBar";
+
 
 const TimelinePage = () => {
   const [diaryEntries, setDiaryEntries] = useState([]); //state to store diary entries
   const [error, setError] = useState(null); //state to handle errors
+  const [successMessage, setSuccessMessage] = useState(null); //state to handle success messages
 
   useEffect(() => {
     const fetchDiaryEntries = async () => {
@@ -49,6 +48,10 @@ const TimelinePage = () => {
           entry._id === id ? updatedEntry : entry
         )
       ); // update the entry in the state variable
+      setSuccessMessage("Diary entry updated successfully!");
+      setTimeout(() => {
+        setSuccessMessage(null);
+      }, 5000);
     } catch (error) {
       console.error("Error updating diary entry:", error);
       setError(error.message);
@@ -56,10 +59,14 @@ const TimelinePage = () => {
         setError(null);
       }, 5000);
     }
-  }
-  
+  };
+   
+
 
   return (
+    <>
+<NavBar />
+
     <div className="timeline">
       <h1>Timeline Page</h1>
       {error && <p className="error">{error}</p>}
@@ -69,7 +76,9 @@ const TimelinePage = () => {
         onUpdate={updateEntry}
       />
     </div>
+    </>
   );
 };
 
 export default TimelinePage;
+
