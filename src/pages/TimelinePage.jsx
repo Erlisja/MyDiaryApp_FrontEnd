@@ -1,8 +1,11 @@
 import { useEffect, useState } from "react";
-import {getAllDiaryEntries,deleteDiaryEntry,updateDiaryEntry} from "../utilities/diaryEntryService";
+import {
+  getAllDiaryEntries,
+  deleteDiaryEntry,
+  updateDiaryEntry,
+} from "../utilities/diaryEntryService";
 import DiaryEntryList from "../components/DiaryEntryList";
 import NavBar from "../components/NavBar";
-
 
 const TimelinePage = () => {
   const [diaryEntries, setDiaryEntries] = useState([]); //state to store diary entries
@@ -44,9 +47,7 @@ const TimelinePage = () => {
     try {
       const updatedEntry = await updateDiaryEntry(id, updatedData); // call updateDiaryEntry function to update the entry in the API
       setDiaryEntries((prevEntries) =>
-        prevEntries.map((entry) =>
-          entry._id === id ? updatedEntry : entry
-        )
+        prevEntries.map((entry) => (entry._id === id ? updatedEntry : entry))
       ); // update the entry in the state variable
       setSuccessMessage("Diary entry updated successfully!");
       setTimeout(() => {
@@ -60,25 +61,22 @@ const TimelinePage = () => {
       }, 5000);
     }
   };
-   
-
 
   return (
     <>
-<NavBar />
+      <NavBar />
 
-    <div className="timeline">
-      <h1>Timeline Page</h1>
-      {error && <p className="error">{error}</p>}
-      <DiaryEntryList
-        entries={diaryEntries}
-        onDelete={deleteEntry}
-        onUpdate={updateEntry}
-      />
-    </div>
+      <div className="timeline">
+        <h1>Timeline Page</h1>
+        {error && <p className="error">{error}</p>}
+        <DiaryEntryList
+          entries={diaryEntries}
+          onDelete={deleteEntry}
+          onUpdate={updateEntry}
+        />
+      </div>
     </>
   );
 };
 
 export default TimelinePage;
-

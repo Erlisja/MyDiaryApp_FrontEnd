@@ -1,23 +1,23 @@
-:root{
-  --primary-color:#D9CCC5;
-  --secondary-color:#BFA98E;
-  --third-color:#F2D4C2;
-  --fourth-color:#F2E6D8;
-  --fifth-color:#BFB8AE;
-  --sixth-color:#6E7372;
-  --background-dark-color:#626973;
-  --background-dark-grey:#80848C;
+:root {
+  --primary-color: #D9CCC5;
+  --secondary-color: #BFA98E;
+  --third-color: #F2D4C2;
+  --fourth-color: #F2E6D8;
+  --fifth-color: #BFB8AE;
+  --sixth-color: #6E7372;
+  --background-dark-color: #626973;
+  --background-dark-grey: #80848C;
   --border-color: #2e344e;
-  --background-light-color:#D9D2D0;
-  --background-light-color-2:#BFB2AA;
+  --background-light-color: #D9D2D0;
+  --background-light-color-2: #BFB2AA;
   --white-color: #F2F2F2;
-  --font-light-color:#F2F2F2;
-  --font-dark-color:#5c5b5c;
+  --font-light-color: #F2F2F2;
+  --font-dark-color: #5c5b5c;
   --font-dark-color-2: #151515;
   --sidebar-dark-color: #D9CCC5;
   --sidebar-dark-color-2: #BFA98E;
-  
-  
+
+
 }
 
 
@@ -46,50 +46,53 @@ body {
 .bodoni-moda-headers {
   font-family: "Bodoni Moda", serif;
   font-weight: 600;
-  font-style:italic;
+  font-style: italic;
 }
 
-.hero-div{
+.hero-div {
   background: url('/background.jpg') no-repeat center center;
   background-position: center;
   background-size: cover;
   height: 100vh;
-  margin:0;
+  margin: 0;
   margin-top: 0 !important;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  overflow-y:auto;
+  overflow-y: auto;
 }
 
-.title{
+.title {
   font-size: 4rem;
   color: var(--font-dark-color-2);
   font-family: 'Parisienne';
   margin-bottom: 1rem;
 }
-.subtitle{
+
+.subtitle {
   font-size: 2.5rem;
   color: var(--font-dark-color-2);
   font-family: 'Parisienne';
   margin-bottom: 5rem;
 }
+
 .auth-container {
-  text-align: center; /* Center-align text and buttons */
+  text-align: center;
+  /* Center-align text and buttons */
   margin: 2rem auto;
 }
 
 .auth-text {
   font-size: 1.2rem;
-  color:var(--font-dark-color);
+  color: var(--font-dark-color);
   margin-bottom: 1rem;
 }
 
 .auth-buttons {
   display: flex;
-  justify-content: center; 
-  gap: 1rem; 
+  justify-content: center;
+  gap: 1rem;
 }
 
 .btn {
@@ -101,23 +104,24 @@ body {
 }
 
 .btn-signup {
-  background-color: var(--primary-color);  
+  background-color: var(--primary-color);
   color: var(--font-dark-color);
 }
 
 .btn-signup:hover {
- color: var(--primary-color);  
+  color: var(--primary-color);
   background-color: var(--font-dark-color);
 
-  
+
 }
 
 .btn-signin {
-  background-color: var(--primary-color);  
+  background-color: var(--primary-color);
   color: var(--font-dark-color);
 }
+
 .btn-signin:hover {
-  color: var(--primary-color);  
+  color: var(--primary-color);
   background-color: var(--font-dark-color);
 }
 
@@ -154,7 +158,8 @@ body {
 .auth-card {
   position: relative;
   z-index: 2;
-  background-color: rgba(255, 255, 255, 0.4); /* Transparent card */
+  background-color: rgba(255, 255, 255, 0.4);
+  /* Transparent card */
   border-radius: 15px;
   padding: 2rem;
   width: 90%;
@@ -236,14 +241,14 @@ body {
 
 /* Background styling for the navbar */
 
-.navbar  {
+.navbar {
   font-family: 'Bodoni Moda', serif;
   background-color: var(--fourth-color);
   color: var(--font-dark-color);
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
   z-index: 1000;
 
- 
+
 
 }
 
@@ -294,6 +299,7 @@ body {
   display: flex;
   gap: 1rem;
 }
+
 .navbar-vertical {
   flex-direction: column;
   align-items: flex-start;
@@ -388,28 +394,125 @@ body {
   }
 }
 
-.container-fluid{
+.container-fluid {
   display: flex;
 
 }
 
 /* ============= */
-
-.home-container {
+.home-container1 {
   background: url('/bkcg3.jpg');
   background-size: cover;
   background-position: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
   height: 100vh;
 }
-.subtitle-txt {
+
+.home-container {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.title {
   font-size: 2rem;
-  color: var(--font-dark-color-2);
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.subtitle-txt {
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.grid-item {
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 10px;
+  padding: 15px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.quote-section,
+.writing-prompt,
+.recent-entries,
+.mood-tracker,
+.achievements,
+.calendar-widget,
+.music-player {
   font-family: 'Bodoni Moda', serif;
- font-style: italic;
-  margin-bottom: 5rem;
-  margin-top: 5rem;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+ul li {
+  padding: 5px 0;
+}
+
+.mood-buttons button {
+  margin: 5px;
+  padding: 10px 20px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 5px;
+  background-color: var(--secondary-color);
+  color: white;
+  cursor: pointer;
+}
+
+.mood-buttons button:hover {
+  background-color: var(--font-dark-color);
+}
+
+.calendar {
+  border: 2px dashed var(--secondary-color);
+  padding: 20px;
+  font-style: italic;
+  color: gray;
+}
+
+/* styling for the entry page */
+.entry-page {
+  padding: 2rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.entry-page h1 {
+  font-size: 2.5rem;
+  color: #333;
+}
+
+.entry-page p {
+  font-size: 1.2rem;
+  color: #666;
+}
+
+.entry-page small {
+  font-size: 0.9rem;
+  color: #aaa;
+}
+
+.entry-link {
+  cursor: pointer;
+  color: inherit;
+  border: 1px solid var(--font-dark-color);
+  padding: 2px 4px;
+  margin: 4px 0;
+  border-radius: 10px;
+  background-color: "var(--fourth-color)";
+}
+.entry-link:hover {
+  background-color: var(--secondary-color);
+  color: var(--fourth-color);
 }

@@ -44,6 +44,7 @@ const addDiaryEntry = async (entryData) => {
         const response = await axios.post(`${URL}/diary-entries`, entryData, {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem('token')}`,
+                "Content-Type": "application/json",
             },
         });
         return response.data; // Return the response
@@ -92,7 +93,7 @@ export async function updateDiaryEntry(id, updatedData) {
             },
             body: JSON.stringify(updatedData)
         })
-        
+
         if (response.ok) {
             return response.json(); // Return the updated entry
         } else {
@@ -107,22 +108,52 @@ export async function updateDiaryEntry(id, updatedData) {
 
 
 
+// export the function to get a single diary entry from the API
+export async function getDiaryEntry(id) {
+    const response = await fetch(URL + `/${id}`, {
+        method: 'GET',
+        headers: {    
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
+            
+        }
+    })
+    // check if the response is OK
+    if (response.ok) {
+        return response.json();
+    } else {
+        throw new Error('An error occurred. Please try again');
+    }
+}
 
-    // export the function to get a single diary entry from the API
-    export async function getDiaryEntry(id) {
-        const response = await fetch(URL + `/${id}`, {
+// export the function to get the last 5 diary entries from the API
+export async function getLastDiaryEntries() {
+    try {
+        const token = localStorage.getItem('token'); // Retrieve token from localStorage
+        if (!token) {
+            throw new Error('No token found. Please log in.');
+        }
+        const response = await fetch(URL + '/last5', {
             method: 'GET',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`,
             }
         })
-        // check if the response is OK
+        // check if the response is OK 
         if (response.ok) {
-            return response.json();
-        } else {
+            return await response.json();
+        }
+        else {
             throw new Error('An error occurred. Please try again');
         }
+    } catch (error) {
+        console.error('Fetch Error:', error.message);
+        throw new Error('Error getting last 5 diary entries: ' + error.message);
     }
+}
 
 
-    export default { addDiaryEntry };
+
+
+export default { addDiaryEntry };

@@ -122,8 +122,8 @@ const DailyDiaryPage = () => {
           <label>Date:</label>
           <input
             type="date"
-            name="date"
-            value={formData.createdAt}
+            name="createdAt"
+            value={ formData.createdAt }
             onChange={handleChange}
           />
         </div>

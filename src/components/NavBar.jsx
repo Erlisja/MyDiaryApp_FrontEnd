@@ -48,13 +48,18 @@ function NavBar({ layout, handleLogOut }) {
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             <li className="nav-item">
               <Link className="nav-link" to="/daily-diary">
-                Diary
+                Daily Diary
               </Link>
             </li>
             <li className="nav-item">
               <Link className="nav-link" to="/timeline">
                 Timeline
               </Link>
+              <li className="nav-item">
+              <Link className="nav-link" to="/entry/:id">
+                Diary Entry
+              </Link>
+            </li>
             </li>
             <li className="nav-item">
               <Link className="nav-link" to="/affirmations">

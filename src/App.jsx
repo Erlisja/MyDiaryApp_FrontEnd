@@ -10,6 +10,7 @@ import DailyDiaryPage from "./pages/DailyDiaryPage";
 import HomePage from "./pages/HomePage";
 import LoginForm from "./components/LoginForm";
 import SignUpForm from "./components/SignUpForm";
+import EntryPage from "./pages/EntryPage";
 
 import "./App.css";
 
@@ -31,6 +32,7 @@ function App() {
   <Route path="/goals" element={<GoalsPage />} />
   <Route path="/profile" element={<ProfilePage />} /> */}
             <Route path="/" element={<WelcomePage />} />
+            <Route path="/entry/:id" element={<EntryPage />} /> 
           </Routes>
         </>
       ) : (
