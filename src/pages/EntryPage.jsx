@@ -1,6 +1,8 @@
 import { useParams } from "react-router";
 import { getDiaryEntry } from "../utilities/diaryEntryService";
 import { useState, useEffect } from "react";
+import Calendar from "react-calendar"; // Import the Calendar component
+import "react-calendar/dist/Calendar.css"; // Import the Calendar CSS - default calendar styling
 import NavBar from "../components/NavBar";
 
 function EntryPage() {
@@ -10,7 +12,7 @@ function EntryPage() {
     mood: "",
     tags: [],
     content: "",
-    createdAt:new Date(),
+    createdAt: new Date(),
   }); // set the entry state - this is the default state
 
   useEffect(() => {
@@ -30,28 +32,50 @@ function EntryPage() {
 
   return (
     <>
+    <div className="entry-page-container">
+
       <NavBar layout={"vertical"} />
-     
-        <div className="entry-page">
-          <h1 className="title">Diary Page</h1>
-          <h1 className="title-div">{entry.title}</h1>
-          <p className="tags-div">
-            <strong>Mood:</strong> {entry.mood}
-          </p>
-          <p className="tags-divs">
-            <strong>Tags:</strong>
-            {entry.tags?.length ? entry.tags.join(", ") : "No tags"}
-          </p>
+      <div className="entry-page">
+        <h1 className="title">Diary Page</h1>
+      
+        {/* Calendar View */}
+        <div className="calendar-div">
+          <Calendar
+            value={new Date(entry.createdAt)} // Highlight the diary entry date
+            tileClassName={({ date, view }) =>
+              date.toISOString().split("T")[0] ===
+              new Date(entry.createdAt).toISOString().split("T")[0]
+                ? "highlight-date"
+                : ""
+            }
+          />
+       
+        {/* Diary Entry Details */}
+        <div className="entry-header">
+          <div className="tags-div">
+            <p>
+              <strong>Mood:</strong> {entry.mood}{" "}
+            </p>
+            <p>
+              <strong>Tags:</strong>
+              {entry.tags?.length ? entry.tags.join(", ") : "No tags"}
+            </p>
+          </div>
+          <h2 id="title-div">{entry.title}</h2>
+        </div>
+        </div>
+        <div className="content-box">
           <p className="content-div">
             <strong>Content:</strong> {entry.content}
           </p>
-          <p className="calendar-div">
-            <small>
-              Written on: {new Date(entry.createdAt).toLocaleDateString()}
-            </small>
-          </p>
         </div>
-      
+        <p className="calendar-div">
+          <small>
+            Written on: {new Date(entry.createdAt).toLocaleDateString()}
+          </small>
+        </p>
+      </div>
+    </div>
     </>
   );
 }

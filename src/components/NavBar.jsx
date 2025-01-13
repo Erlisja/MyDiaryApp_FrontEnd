@@ -17,11 +17,10 @@ function NavBar({ layout, handleLogOut }) {
     // Update state will trigger re-render in App
     setUser(null);
   }
-
   return (
     <nav
-      className={`navbar navbar-light  ${
-        layout === "horizontal" ? "navbar-expand-lg" : "navbar-vertical "
+      className={`navbar navbar-light ${
+        layout === "horizontal" ? "navbar-expand-lg" : "navbar-vertical"
       }`}
     >
       <div className="container-fluid">
@@ -40,12 +39,17 @@ function NavBar({ layout, handleLogOut }) {
           <span className="navbar-toggler-icon"></span>
         </button>
         <div
-          className={`${
-            layout === "horizontal" ? "collapse navbar-collapse" : ""
+          className={`collapse navbar-collapse ${
+            layout === "vertical" ? "navbar-vertical-collapse" : ""
           }`}
           id="navbarNav"
         >
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+            <li className="nav-item">
+              <Link className="nav-link" to="/home">
+                Home
+              </Link>
+            </li>
             <li className="nav-item">
               <Link className="nav-link" to="/daily-diary">
                 Daily Diary
@@ -55,11 +59,11 @@ function NavBar({ layout, handleLogOut }) {
               <Link className="nav-link" to="/timeline">
                 Timeline
               </Link>
-              <li className="nav-item">
+            </li>
+            <li className="nav-item">
               <Link className="nav-link" to="/entry/:id">
                 Diary Entry
               </Link>
-            </li>
             </li>
             <li className="nav-item">
               <Link className="nav-link" to="/affirmations">

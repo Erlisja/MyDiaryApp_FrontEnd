@@ -3,6 +3,8 @@ import { getUser } from "../utilities/users-services";
 import { getLastDiaryEntries } from "../utilities/diaryEntryService";
 import NavBar from "../components/NavBar";
 import { Link } from "react-router";
+import Calendar from "react-calendar";
+import "react-calendar/dist/Calendar.css";
 
 function HomePage() {
   const [user, setUser] = useState(getUser());
@@ -53,7 +55,8 @@ function HomePage() {
                   {recentEntries.length > 0 ? (
                     <ul>
                       {recentEntries.map((entry, index) => (
-                        <Link key={index}
+                        <Link
+                          key={index}
                           to={`/entry/${entry._id}`}
                           style={{ textDecoration: "none", color: "inherit" }}
                         >
@@ -96,13 +99,7 @@ function HomePage() {
                 <div className="grid-item calendar-widget">
                   <h2>Your Journal Calendar:</h2>
                   {/* Placeholder for Calendar Component */}
-                  <div className="calendar">[Calendar Placeholder]</div>
-                </div>
-
-                {/* Music Player */}
-                <div className="grid-item music-player">
-                  <h2>Relax and Write:</h2>
-                  <button>Play Ambient Music</button>
+                  <Calendar />
                 </div>
               </div>
             </>
