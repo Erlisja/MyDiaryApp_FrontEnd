@@ -104,7 +104,7 @@ body {
   border: 1.2px solid var(--font-dark-color);
 }
 
-.btn-signup {
+.btn-signup  {
   background-color: var(--primary-color);
   color: var(--font-dark-color);
 }
@@ -196,7 +196,7 @@ body {
   margin-bottom: 1rem;
 }
 
-.auth-card button {
+.auth-card button, .submit-btn button {
   background-color: var(--primary-color);
   color: var(--font-dark-color);
   padding: 0.8rem 1.5rem;
@@ -211,6 +211,7 @@ body {
   background-color: var(--font-dark-color);
   color: var(--primary-color);
 }
+
 
 /* Error message styling */
 .auth-card p {
@@ -507,12 +508,12 @@ ul li {
   background-color: var(--font-dark-color);
 }
 
-.calendar {
+/* .calendar {
   border: 2px dashed var(--secondary-color);
   padding: 20px;
   font-style: italic;
   color: gray;
-}
+} */
 
 /* styling for the entry page */
 .entry-page-container{
@@ -526,19 +527,16 @@ ul li {
   padding: 2rem;
   max-width: 100%;
   margin: 0 1rem 10rem 20rem;
+  font-size: 2.5rem;
+  color:var(--font-dark-color);
+  font-family: 'Bodoni Moda', serif;
 }
+
 /*responsive design */
 @media (max-width: 768px) {
   .entry-page {
     margin: 0 1rem 10rem 1rem;
   }
-}
-
-
-.entry-page {
-  font-size: 2.5rem;
-  color:var(--font-dark-color);
-  font-family: 'Bodoni Moda', serif;
 }
 
 
@@ -631,7 +629,7 @@ ul li {
 }
 
 
-.calendar-div {
+.calendar-div{
   margin: 20px 0;
   display: flex;
   justify-content: start;
@@ -820,4 +818,155 @@ ul li {
 .details-link:hover {
   background-color: var(--secondary-color);
   color: var(--fourth-color);
+}
+
+
+
+/* Diary Entry Page Styling */
+.diary-entry-page{
+  background: url('/bck2.jpg') no-repeat center center;
+  min-height: 100vh;
+  background-attachment: fixed;
+  background-size: cover;
+  padding: 30px;
+  font-family: 'Bodoni Moda', serif;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  
+
+}
+
+
+.diary-entry-page .entry-container {
+ 
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Soft shadow for elevation */
+  width: 100%;
+  max-width: 600px; /* Center form and limit width */
+ 
+}
+
+.diary-entry-page .title {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-size: 2.5rem;
+  color: #333;
+  font-weight: bold;
+}
+
+.entry-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-bottom: 1rem;
+  margin: auto;
+  background-color: rgba(255, 255, 255, 0.6);
+}
+
+.entry-container label {
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 0.25rem;
+}
+
+.entry-container input,
+.entry-container textarea,
+.entry-container select {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+  background-color: rgba(255, 255, 255, 0.9); /* Slightly transparent inputs */
+  color: var(--font-dark-color-2);
+}
+
+.entry-container textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.entry-container input:focus,
+.entry-container textarea:focus,
+.entry-container select:focus {
+  border-color: var(--background-light-color-2);
+  outline: none;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
+}
+
+
+
+.entry-container button:hover {
+  background-color: var(--font-dark-color);
+}
+
+/* Hide the default checkbox */
+.favorite-container input[type="checkbox"] {
+  display: none;
+}
+
+
+.favorite-container .heart-checkbox {
+  cursor: pointer;
+  font-size: 24px; /* Adjust size of the icon */
+  color: #858585; /* Default gray color */
+  transition: color 0.3s ease;
+  margin-left: 30px;
+}
+
+/* Change the color when checked */
+.favorite-container input[type="checkbox"]:checked + .heart-checkbox i {
+  color: #ff4d4d; 
+}
+
+
+/* ============= */
+
+.entry-container {
+  display: grid;
+  grid-template-areas:
+    "calendar-div entry-header"
+    "calendar-div title-div"
+    "content-box content-box";
+  grid-template-columns: 1fr 2fr;
+  gap: 20px;
+  width: 100%;
+  height: 100%;
+  padding: 50px;
+  margin: auto;
+}
+
+.calendar-div {
+  grid-area: calendar-div;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+}
+
+.entry-container, .form-container
+{
+  font-size: 1rem;
+  gap: 1rem;
+  margin: auto;
+
+}
+
+
+.title-div {
+  grid-area: title-div;
+}
+
+.content-box {
+  grid-area: content-box;
+  height: 100%;
+  border: 1px solid #ccc;
+}
+
+.submit-btn  button{
+  margin-top: 50px;
+  text-align: left;
+  padding: 10px 20px;
+ 
 }

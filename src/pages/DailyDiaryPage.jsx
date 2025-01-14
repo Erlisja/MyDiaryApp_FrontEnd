@@ -3,6 +3,8 @@ import axios from "axios";
 import { jwtDecode } from "jwt-decode";
 import diaryEntryService from "../utilities/diaryEntryService";
 import NavBar from "../components/NavBar";
+import Calendar from "react-calendar"; // Import the Calendar component
+import "react-calendar/dist/Calendar.css"; // Import the Calendar CSS - default calendar styling
 
 // Define the DailyDiaryPage component
 const DailyDiaryPage = () => {
@@ -58,78 +60,93 @@ const DailyDiaryPage = () => {
     }
   };
 
+
+
+
   return (
     <>
-    <NavBar layout={'horizontal'} />
-   
-    <div className="diary-page">
-      <h1>Add New Diary Entry</h1>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>Title:</label>
-          <input
-            type="text"
-            name="title"
-            value={formData.title}
-            onChange={handleChange}
-            required
-          />
+      <div className="entry-page-container">
+        <NavBar layout="vertical" />
+        <div className="entry-page">
+          <h1 className="title">Add New Diary Entry</h1>
+
+          {/* Form Layout */}
+          <form className="entry-container" onSubmit={handleSubmit}>
+            {/* <div className="form-grid"> */}
+              {/* Calendar Component */}
+
+              <div className="calendar-div">
+                <Calendar 
+                  value={new Date(formData.createdAt)}
+                  onChange={(date) =>
+                    setFormData((prevData) => ({
+                      ...prevData,
+                      createdAt: date.toISOString().split("T")[0],
+                    }))
+                  
+                  }
+                />
+              </div>
+
+              {/* Mood and Tags */}
+              <div className="entry-header">
+                <div>
+                  <label>Mood:</label>
+                  <select
+                    name="mood"
+                    value={formData.mood}
+                    onChange={handleChange}
+                  >
+                    <option value="happy">Happy</option>
+                    <option value="sad">Sad</option>
+                    <option value="angry">Angry</option>
+                    <option value="surprised">Surprised</option>
+                    <option value="neutral">Neutral</option>
+                  </select>
+                </div>
+                <div>
+                  <label>Tags:</label>
+                  <input
+                    type="text"
+                    name="tags"
+                    value={formData.tags}
+                    onChange={handleChange}
+                    placeholder="Comma-separated tags"
+                  />
+                </div>
+              </div>
+
+              {/* Title Input */}
+              <div className="title-div">
+                <label>Title:</label>
+                <input
+                  type="text"
+                  name="title"
+                  value={formData.title}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+
+              {/* Content Textarea */}
+              <div className="content-box">
+                <label>Content:</label>
+                <textarea
+                  name="content"
+                  value={formData.content}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+            {/* </div> */}
+
+            {/* Submit Button */}
+            <div className="submit-btn">
+              <button type="submit">Add Entry</button>
+            </div>
+          </form>
         </div>
-        <div>
-          <label>Mood:</label>
-          <select name="mood" value={formData.mood} onChange={handleChange}>
-            <option value="happy">Happy</option>
-            <option value="sad">Sad</option>
-            <option value="angry">Angry</option>
-            <option value="surprised">Surprised</option>
-            <option value="neutral">Neutral</option>
-          </select>
-        </div>
-        <div>
-          <label>Tags:</label>
-          <input
-            type="text"
-            name="tags"
-            value={formData.tags}
-            onChange={handleChange}
-            placeholder="Comma-separated tags"
-          />
-        </div>
-        <div>
-          <label>Content:</label>
-          <textarea
-            name="content"
-            value={formData.content}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div>
-          <label>Favorite:</label>
-          <input
-            type="checkbox"
-            name="isFavorite"
-            checked={formData.isFavorite}
-            onChange={(e) =>
-              setFormData((prevData) => ({
-                ...prevData,
-                isFavorite: e.target.checked,
-              }))
-            }
-          />
-        </div>
-        <div>
-          <label>Date:</label>
-          <input
-            type="date"
-            name="createdAt"
-            value={ formData.createdAt }
-            onChange={handleChange}
-          />
-        </div>
-        <button type="submit">Add Entry</button>
-      </form>
-    </div>
+      </div>
     </>
   );
 };

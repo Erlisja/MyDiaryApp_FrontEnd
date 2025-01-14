@@ -13,6 +13,7 @@ function SignUpForm(props) {
 
   const [error, setError] = useState(""); // set the error message to an empty string
 
+
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value }); // this line of code is used to update the state of the form data when the user types in the input field
     setError(""); // this line of code is used to clear the error message when the user types in the input field
