@@ -6,6 +6,7 @@ import {
 } from "../utilities/diaryEntryService";
 import DiaryEntryList from "../components/DiaryEntryList";
 import NavBar from "../components/NavBar";
+import { Link } from "react-router";
 
 const TimelinePage = () => {
   const [diaryEntries, setDiaryEntries] = useState([]); //state to store diary entries
@@ -65,15 +66,19 @@ const TimelinePage = () => {
   return (
     <>
       <NavBar />
-
-      <div className="timeline">
-        <h1>Timeline Page</h1>
-        {error && <p className="error">{error}</p>}
-        <DiaryEntryList
-          entries={diaryEntries}
-          onDelete={deleteEntry}
-          onUpdate={updateEntry}
-        />
+      <div className="timeline-page-container">
+        <h1 className="title">Timeline Page</h1>
+        <div className="timeline">
+          {error && <p className="error">{error}</p>}
+          
+          <DiaryEntryList
+            className="diary-entry-list"
+            entries={diaryEntries}
+            onDelete={deleteEntry}
+            onUpdate={updateEntry}
+          />
+        
+        </div>
       </div>
     </>
   );

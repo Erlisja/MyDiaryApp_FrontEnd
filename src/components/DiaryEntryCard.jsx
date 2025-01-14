@@ -1,5 +1,6 @@
 import React from "react";
 import { useState } from "react";
+import { Link } from "react-router";
 
 function DiaryEntryCard({ entry, onDelete, onUpdate }) {
   const { title, content, tags, mood, isFavorite, createdAt } = entry;
@@ -7,8 +8,14 @@ function DiaryEntryCard({ entry, onDelete, onUpdate }) {
   const [isEditing, setIsEditing] = useState(false);
   const [updatedEntry, setUpdatedEntry] = useState(entry);
 
-  const handleEdit = () => {
+  const handleEdit = (e) => {
+    e.stopPropagation(); // Prevent the click event from bubbling up to the parent element
     setIsEditing(true); // entering the edit mode
+  };
+
+  const handleDelete = (e) => {
+    e.stopPropagation(); // Prevent the click event from bubbling up to the parent element
+    onDelete(entry._id); // Call the onDelete function with the entry id
   };
 
   const handleChange = (e) => {
@@ -39,7 +46,7 @@ function DiaryEntryCard({ entry, onDelete, onUpdate }) {
       }}
     >
       {isEditing ? (
-        <div>
+        <div className="diary-card">
           <h2>Edit Entry</h2>
           <label>Title:</label>
           <input
@@ -98,45 +105,32 @@ function DiaryEntryCard({ entry, onDelete, onUpdate }) {
           <button onClick={handleCancel}>Cancel</button>
         </div>
       ) : (
-        <div>
+        <div className="diary-display">
           <h2>{title}</h2>
-          <p>{content}</p>
-          <p style={{ fontSize: "0.8em", color: "#666" }}>
-            Created: {new Date(createdAt).toLocaleDateString()}
+      
+          <p className="content"> <strong>Content: </strong>{content}</p>
+          <p >
+            <strong>Created:</strong> {new Date(createdAt).toLocaleDateString()}
           </p>
-          <p style={{ fontSize: "0.8em", color: "#666" }}>Mood: {mood}</p>
-          <p style={{ fontSize: "0.8em", color: "#666" }}>
-            Tags: {tags.join(", ")}
+          <p>
+            <strong>Mood:</strong> {mood}
           </p>
-          <p style={{ fontSize: "0.8em", color: "#666" }}>
-            Favorite:<span>{isFavorite ? "❤️" : "🤍"}</span>
+          <p>
+            <strong>Tags: </strong> {tags.join(", ")}
           </p>
-          <button
-            onClick={handleEdit}
-            style={{
-              padding: "8px 12px",
-              background: "blue",
-              color: "#fff",
-              border: "none",
-              borderRadius: "4px",
-              cursor: "pointer",
-            }}
-          >
-            Edit
-          </button>
-          <button
-            onClick={() => onDelete(entry._id)}
-            style={{
-              padding: "8px 12px",
-              background: "red",
-              color: "#fff",
-              border: "none",
-              borderRadius: "4px",
-              cursor: "pointer",
-            }}
-          >
-            Delete
-          </button>
+          <p>
+            <strong>Favorite: </strong>
+            <span>{isFavorite ? "❤️" : "🤍"}</span>
+          </p>       
+            <button onClick={() => onUpdate(entry._id)}>Edit</button>
+            <button onClick={() => onDelete(entry._id)}>Delete</button>
+            <Link
+              to={`/entry/${entry._id}`}
+              className="details-link"
+              
+            >
+              View Details ...
+            </Link>
         </div>
       )}
     </div>

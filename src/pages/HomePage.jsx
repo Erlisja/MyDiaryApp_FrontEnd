@@ -9,6 +9,18 @@ import "react-calendar/dist/Calendar.css";
 function HomePage() {
   const [user, setUser] = useState(getUser());
   const [recentEntries, setRecentEntries] = useState([]);
+  const [message, setMessage] = useState({
+    title: "Thoughts for the day",
+    content: "",
+    tags: "thoughts",
+    mood: "happy",
+    isFavorite: false,
+    createdAt: new Date().toISOString().split("T")[0], // Default to today
+  });
+
+
+
+
 
   useEffect(() => {
     setUser(getUser());
@@ -47,6 +59,21 @@ function HomePage() {
                 <div className="grid-item writing-prompt">
                   <h2>Need some inspiration?</h2>
                   <p>What’s one thing that made you smile today?</p>
+                  <form className="message-form">
+                    <textarea
+                      name="content"
+                      value={message.content}
+                      onChange={(e) =>
+                        setMessage((prev) => ({
+                          ...prev,
+                          content: e.target.value,
+                        }))
+                      }
+                    ></textarea>
+                    <button type="submit">Save</button>
+                  </form>
+
+
                 </div>
 
                 {/* Recent Entries */}

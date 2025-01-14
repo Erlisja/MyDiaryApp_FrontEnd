@@ -452,8 +452,6 @@ body {
 
 }
 
-
-
 .subtitle-txt {
   font-size: 1.2rem;
   margin-bottom: 20px;
@@ -670,5 +668,156 @@ ul li {
 .react-calendar__tile--active:enabled:hover,
 .react-calendar__tile--active:enabled:focus {
   background-color: var(--font-dark-color);
+  color: var(--fourth-color);
+}
+
+
+/* Timeline Page */
+.timeline-page-container {
+  background: url('/bckg4.jpg') no-repeat center center;
+  min-height: 100vh;
+  background-attachment: fixed;
+  background-size: cover;
+  padding: 50px;
+  font-family: 'Bodoni Moda', serif;
+}
+
+.timeline {
+  padding: 2rem 1rem 2rem 5rem;
+  margin-left: 15rem;
+  max-width: 1200px;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 12px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+ 
+}
+
+.timeline h1.title {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-size: 2rem;
+  color: var(--font-dark-color-2);
+  font-weight: bold;
+
+}
+
+/* Diary Entry List */
+.diary-entry-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 16px;
+
+}
+
+/* Diary Entry Card */
+.diary-card {
+  background-color: #ffffff;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  padding: 16px;
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.diary-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.diary-card h2 {
+  font-size: 1.5rem;
+  color: var(--font-dark-color-2);
+  margin-bottom: 8px;
+}
+
+.diary-card p {
+  font-size: 0.9rem;
+  color:var(--font-dark-color);
+  margin-bottom: 8px;
+}
+
+/* Edit & Delete Buttons */
+.diary-card button {
+  padding: 8px 12px;
+  margin-right: 8px;
+  font-size: 0.9rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.diary-card button:first-of-type {
+  background-color:#cfa78e;
+  color: #fff;
+}
+
+.diary-card button:first-of-type:hover {
+  background-color: #f8bb95;
+}
+
+.diary-card button:last-of-type {
+  background-color: rgb(224, 69, 69);
+  color: #fff;
+}
+
+.diary-card button:last-of-type:hover {
+  background-color: #a71d2a;
+}
+
+.diary-card label {
+  font-size: 1rem;
+  color: #444444;
+  gap: 10px;
+  margin: 10px;
+  align-items: start;
+  justify-content: start;
+  font-style: italic;
+  font-family: 'Bodoni Moda', serif;
+  font-weight: 800;
+}
+
+.diary-card input{
+  font-size: 1rem;
+  color: #444444;
+  font-family: 'Bodoni Moda', serif;
+  font-weight: 200;
+  width: 60%;
+  padding: 0.8rem;
+  border: 1px solid var(--font-dark-color);
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+
+.diary-display h2 {
+  font-size: 1.5rem;
+  color: var(--font-dark-color-2);
+  font-family: 'Bodoni Moda', serif;
+  font-weight: 800;
+  margin-bottom: 1rem;
+}
+
+.diary-display .content {
+  height: 4.5em; /* Adjust based on line-height and number of lines */
+  line-height: 1.5; /* Line height */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
+}
+
+.details-link{
+  color: var(--font-dark-color);
+  font-size: 1rem;
+  font-family: 'Bodoni Moda', serif;
+  font-weight: 800;
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  background-color: var(--fourth-color);
+  cursor: pointer;
+}
+
+.details-link:hover {
+  background-color: var(--secondary-color);
   color: var(--fourth-color);
 }
