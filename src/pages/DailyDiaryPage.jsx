@@ -60,9 +60,6 @@ const DailyDiaryPage = () => {
     }
   };
 
-
-
-
   return (
     <>
       <div className="entry-page-container">
@@ -73,71 +70,70 @@ const DailyDiaryPage = () => {
           {/* Form Layout */}
           <form className="entry-container" onSubmit={handleSubmit}>
             {/* <div className="form-grid"> */}
-              {/* Calendar Component */}
+            {/* Calendar Component */}
 
-              <div className="calendar-div">
-                <Calendar 
-                  value={new Date(formData.createdAt)}
-                  onChange={(date) =>
-                    setFormData((prevData) => ({
-                      ...prevData,
-                      createdAt: date.toISOString().split("T")[0],
-                    }))
-                  
-                  }
-                />
+            <div className="calendar-div">
+              <Calendar
+                value={new Date(formData.createdAt)}
+                onChange={(date) =>
+                  setFormData((prevData) => ({
+                    ...prevData,
+                    createdAt: date.toISOString().split("T")[0],
+                  }))
+                }
+              />
+            </div>
+
+            {/* Mood and Tags */}
+            <div className="entry-header">
+              <div>
+                <label>Mood:</label>
+                <select
+                  name="mood"
+                  value={formData.mood}
+                  onChange={handleChange}
+                >
+                  <option value="happy">Happy</option>
+                  <option value="sad">Sad</option>
+                  <option value="angry">Angry</option>
+                  <option value="surprised">Surprised</option>
+                  <option value="neutral">Neutral</option>
+                </select>
               </div>
-
-              {/* Mood and Tags */}
-              <div className="entry-header">
-                <div>
-                  <label>Mood:</label>
-                  <select
-                    name="mood"
-                    value={formData.mood}
-                    onChange={handleChange}
-                  >
-                    <option value="happy">Happy</option>
-                    <option value="sad">Sad</option>
-                    <option value="angry">Angry</option>
-                    <option value="surprised">Surprised</option>
-                    <option value="neutral">Neutral</option>
-                  </select>
-                </div>
-                <div>
-                  <label>Tags:</label>
-                  <input
-                    type="text"
-                    name="tags"
-                    value={formData.tags}
-                    onChange={handleChange}
-                    placeholder="Comma-separated tags"
-                  />
-                </div>
-              </div>
-
-              {/* Title Input */}
-              <div className="title-div">
-                <label>Title:</label>
+              <div>
+                <label>Tags:</label>
                 <input
                   type="text"
-                  name="title"
-                  value={formData.title}
+                  name="tags"
+                  value={formData.tags}
                   onChange={handleChange}
-                  required
+                  placeholder="Comma-separated tags"
                 />
               </div>
+            </div>
 
-              {/* Content Textarea */}
-              <div className="content-box">
-                <label>Content:</label>
-                <textarea
-                  name="content"
-                  value={formData.content}
-                  onChange={handleChange}
-                  required
-                />
-              </div>
+            {/* Title Input */}
+            <div className="title-div">
+              <label>Title:</label>
+              <input
+                type="text"
+                name="title"
+                value={formData.title}
+                onChange={handleChange}
+                required
+              />
+            </div>
+
+            {/* Content Textarea */}
+            <div className="content-box">
+              <label>Content:</label>
+              <textarea
+                name="content"
+                value={formData.content}
+                onChange={handleChange}
+                required
+              />
+            </div>
             {/* </div> */}
 
             {/* Submit Button */}
