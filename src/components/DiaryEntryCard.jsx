@@ -9,7 +9,7 @@ function DiaryEntryCard({ entry, onDelete, onUpdate }) {
   const [updatedEntry, setUpdatedEntry] = useState(entry);
 
   const handleEdit = (e) => {
-    e.stopPropagation(); // Prevent the click event from bubbling up to the parent element
+    // e.stopPropagation(); // Prevent the click event from bubbling up to the parent element
     setIsEditing(true); // entering the edit mode
   };
 
@@ -122,12 +122,25 @@ function DiaryEntryCard({ entry, onDelete, onUpdate }) {
             <strong>Favorite: </strong>
             <span>{isFavorite ? "❤️" : "🤍"}</span>
           </p>       
-            <button onClick={() => onUpdate(entry._id)}>Edit</button>
-            <button onClick={() => onDelete(entry._id)}>Delete</button>
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              handleEdit();
+            }}
+          >
+            Edit
+          </button>
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              handleDelete(e);
+            }}
+          >
+            Delete
+          </button>
             <Link
               to={`/entry/${entry._id}`}
-              className="details-link"
-              
+              className="details-link"      
             >
               View Details ...
             </Link>

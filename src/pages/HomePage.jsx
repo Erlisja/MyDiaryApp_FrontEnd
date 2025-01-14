@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { getUser } from "../utilities/users-services";
 import { getLastDiaryEntries } from "../utilities/diaryEntryService";
+import diaryEntryService from "../utilities/diaryEntryService";
+import { jwtDecode } from "jwt-decode";
 import NavBar from "../components/NavBar";
 import { Link } from "react-router";
 import Calendar from "react-calendar";
@@ -19,6 +21,39 @@ function HomePage() {
   });
 
 
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const token = localStorage.getItem("token"); // Get the token from local storage
+      if (!token) {
+        console.error("No token found");
+        return;
+      }
+
+      const decodedToken = jwtDecode(token); // Decode the token to get userId
+      const userId = decodedToken._id; // Get the userId from the decoded token
+      const diaryEntryData = {
+        ...message,
+        userId,
+      };
+
+      const response = await diaryEntryService.addDiaryEntry(diaryEntryData);
+      console.log("Diary Entry Added:", response);
+      alert("Diary entry added successfully!");
+      setMessage({
+        title: "Thoughts for the day",
+        content: "",
+        tags: "thoughts",
+        mood: "happy",
+        isFavorite: false,
+        createdAt: new Date().toISOString().split("T")[0], // Reset form data
+      });
+    } catch (error) {
+      console.error("Error adding diary entry:", error);
+      alert("Error adding diary entry!");
+    }
+  }
 
 
 
@@ -59,7 +94,10 @@ function HomePage() {
                 <div className="grid-item writing-prompt">
                   <h2>Need some inspiration?</h2>
                   <p>What’s one thing that made you smile today?</p>
-                  <form className="message-form">
+                
+                  <form className="message-form" onSubmit={handleSubmit}>
+                  <div className="content-box">
+                    <label style={{fontWeight:'bolder', fontFamily:'serif'}}>What's on your mind?</label>
                     <textarea
                       name="content"
                       value={message.content}
@@ -70,7 +108,10 @@ function HomePage() {
                         }))
                       }
                     ></textarea>
+                    </div>
+                    <div className="submit-btn">
                     <button type="submit">Save</button>
+                    </div>
                   </form>
 
 
