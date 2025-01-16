@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { getUser } from "../utilities/users-services";
 import { getLastDiaryEntries, getDiaryEntryDates,getDiaryEntryCount } from "../utilities/diaryEntryService";
+import { getGoalCount } from "../utilities/goalsEntryService";
 import diaryEntryService from "../utilities/diaryEntryService";
 import { jwtDecode } from "jwt-decode";
 import NavBar from "../components/NavBar";
@@ -10,11 +11,13 @@ import CalendarComponent from "../components/CalendarComponent";
 
 
 
+
 function HomePage() {
   const [user, setUser] = useState(getUser());
   const [recentEntries, setRecentEntries] = useState([]);
   const [entriesCount, setEntriesCount] = useState(0);
   const [entryDates,setEntryDates] = useState([]);
+  const [goalsCount, setGoalsCount] = useState(0);
   
 
 
@@ -27,6 +30,8 @@ function HomePage() {
     isFavorite: false,
     createdAt: new Date().toISOString().split("T")[0], // Default to today
   });
+
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -61,15 +66,27 @@ function HomePage() {
     }
   };
 
+// useEffect to fetch goals count
+useEffect(()=>{
+  setUser(getUser());
+  async function getTotalNrGoals(){
+    const count = await getGoalCount();
+    console.log(count);
+    setGoalsCount(count.count);
+  }
+  getTotalNrGoals();
+},[]);
+
+
+
+
   useEffect(()=>{
     setUser(getUser());
-
     // Fetch diary entry dates
     async function fetchDiaryEntryDates() {
       const dates = await getDiaryEntryDates(); // Fetch the dates where entries were made
       setEntryDates(dates); // Set the fetched dates
     }
-
     fetchDiaryEntryDates();
   }, []);
 
@@ -154,7 +171,7 @@ function HomePage() {
                 {/* Recent Entries */}
                 <div className="grid-item recent-entries">
                   <h2>Your Recent Entries:</h2>
-                  {recentEntries.length > 0 ? (
+                  {recentEntries? (
                     <ul>
                       {recentEntries.map((entry, index) => (
                         <Link
@@ -194,7 +211,7 @@ function HomePage() {
                 <div className="grid-item achievements">
                   <h2>Your Achievements:</h2>
                   <p>You've written  {entriesCount}  diary entries! 🌺</p>
-                  <p>Longest streak: 7 days</p>
+                  <p>You have set {goalsCount} goals! 🎯</p>
                 </div>
 
                 {/* Calendar View */}

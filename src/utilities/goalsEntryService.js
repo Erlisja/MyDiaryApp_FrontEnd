@@ -149,6 +149,36 @@ export async function getGoalEntry(id) {
     }
 }
 
+// export the function to get the total number of goals from the API
+export async function getGoalCount() {
+    try {
+        const token = localStorage.getItem('token'); // Retrieve token from localStorage
+        if (!token) {
+            throw new Error('No token found. Please log in.');
+        }
+        const response = await fetch(URL + '/total', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`,
+            }
+        })
+        if (response.ok) {
+            return await response.json();
+        } else {
+            throw new Error('Failed to fetch goal count: ' + response.statusText);
+        }
+    } catch (err) {
+        console.error('Fetch Error:', err.message);
+        throw err;
+    }
+}
+
+
+
+
+
+
 
 export default {
     getAllGoals,
@@ -156,5 +186,5 @@ export default {
     deleteGoalEntry,
     updateGoalEntry,
     getGoalEntry,
-    
+
 };

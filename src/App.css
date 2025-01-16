@@ -102,17 +102,18 @@ body {
   border-radius: 5px;
   cursor: pointer;
   border: 1.2px solid var(--font-dark-color);
+  transition: all 0.3s ease-in-out;
 }
 
 .btn-signup  {
   background-color: var(--primary-color);
   color: var(--font-dark-color);
+
 }
 
 .btn-signup:hover {
   color: var(--primary-color);
   background-color: var(--font-dark-color);
-
 
 }
 
@@ -205,6 +206,7 @@ body {
   border-radius: 5px;
   cursor: pointer;
   transition: all 0.3s ease-in-out;
+  
 }
 
 .auth-card button:hover {
@@ -763,12 +765,12 @@ ul li {
   background-color: #f8bb95;
 }
 
-.diary-card button:last-of-type {
+button.diary-card  {
   background-color: rgb(224, 69, 69);
   color: #fff;
 }
 
-.diary-card button:last-of-type:hover {
+button.diary-card  {
   background-color: #a71d2a;
 }
 
@@ -1040,17 +1042,6 @@ ul li {
 .react-calendar__tile {
   position: relative;
 }
-/* 
-.react-calendar__tile .dot {
-  position: absolute;
-  bottom: 5px;
-  left: 50%;
-  transform: translateX(-50%);
-  background-color: blue;
-  border-radius: 50%;
-  width: 8px;
-  height: 8px;
-} */
 
 /* Goal Edit Modal */
 .modal-overlay {
@@ -1252,7 +1243,7 @@ textarea.form-control {
 
 button.btn {
   padding: 10px 20px;
-  border: none;
+  /* border: none; */
   border-radius: 5px;
   font-size: 1rem;
   cursor: pointer;

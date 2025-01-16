@@ -50,4 +50,14 @@ export async function login(credentials) {
 }
 
 
+// this function will update the user's information
+export async function updateUserInfo(userData) {
+    // call the updateUserInfo function from the users-api file
+    // this will make a PUT request to the API to update the user's information
+    const updatedUser = await usersAPI.updateUserInfo(userData);
+    return updatedUser;
+}
+
+
+
 export default {login};
