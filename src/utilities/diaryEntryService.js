@@ -156,4 +156,60 @@ export async function getLastDiaryEntries() {
 
 
 
+// get the count of all diary entries from the API
+export async function getDiaryEntryCount() {
+    try {
+        const token = localStorage.getItem('token'); // Retrieve token from localStorage
+        if (!token) {
+            throw new Error('No token found. Please log in.');
+        }
+        const response = await fetch(URL + '/count', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`,
+            }
+        })
+        // check if the response is OK
+        if (response.status === 200) {
+            return await response.json();
+        } else {
+            throw new Error(`Server Error: ${response.status} - ${response.statusText}`);
+        }
+    } catch (error) {
+        console.error('Fetch Error:', error.message);
+        throw new Error('Error getting diary entry count: ' + error.message);
+    }
+}
+
+
+export async function getDiaryEntryDates(){
+    try {
+        const token = localStorage.getItem('token'); // Retrieve token from localStorage
+        if (!token) {
+            throw new Error('No token found. Please log in.');
+        }
+        console.log('Token received:', token);
+        const response = await fetch(URL + '/dates', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`,
+            }
+        })
+        // check if the response is OK
+        if (response.ok) {
+            const data = await response.json();
+            console.log('Diary Entry Dates:', data);
+            return data;
+        } else {
+            throw new Error('An error occurred. Please try again');
+        }
+    } catch (error) {
+        console.error('Fetch Error:', error.message);
+        throw new Error('Error getting diary entry dates: ' + error.message);
+    }
+}
+
+
 export default { addDiaryEntry };

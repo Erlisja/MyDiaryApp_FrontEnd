@@ -1,16 +1,24 @@
 import React, { useState, useEffect } from "react";
 import { getUser } from "../utilities/users-services";
-import { getLastDiaryEntries } from "../utilities/diaryEntryService";
+import { getLastDiaryEntries, getDiaryEntryDates,getDiaryEntryCount } from "../utilities/diaryEntryService";
 import diaryEntryService from "../utilities/diaryEntryService";
 import { jwtDecode } from "jwt-decode";
 import NavBar from "../components/NavBar";
 import { Link } from "react-router";
-import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
+import CalendarComponent from "../components/CalendarComponent";
+
+
 
 function HomePage() {
   const [user, setUser] = useState(getUser());
   const [recentEntries, setRecentEntries] = useState([]);
+  const [entriesCount, setEntriesCount] = useState(0);
+  const [entryDates,setEntryDates] = useState([]);
+  
+
+
+
   const [message, setMessage] = useState({
     title: "Thoughts for the day",
     content: "",
@@ -19,8 +27,6 @@ function HomePage() {
     isFavorite: false,
     createdAt: new Date().toISOString().split("T")[0], // Default to today
   });
-
-
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -53,13 +59,25 @@ function HomePage() {
       console.error("Error adding diary entry:", error);
       alert("Error adding diary entry!");
     }
-  }
+  };
 
-
-
-  useEffect(() => {
+  useEffect(()=>{
     setUser(getUser());
 
+    // Fetch diary entry dates
+    async function fetchDiaryEntryDates() {
+      const dates = await getDiaryEntryDates(); // Fetch the dates where entries were made
+      setEntryDates(dates); // Set the fetched dates
+    }
+
+    fetchDiaryEntryDates();
+  }, []);
+
+
+
+// useEffect to fetch recent entries and entries count
+  useEffect(() => {
+    setUser(getUser());
     // Simulate fetching recent entries from the database
     async function fetchRecentEntries() {
       const entries = await getLastDiaryEntries();
@@ -67,6 +85,20 @@ function HomePage() {
     }
     fetchRecentEntries();
   }, []);
+
+
+  useEffect(() => {
+    setUser(getUser());
+    // Simulate fetching entries count from the database
+    async function fetchEntriesCount() {
+      const count = await getDiaryEntryCount();
+      setEntriesCount(count.count);
+    }
+    fetchEntriesCount();
+
+  }, []);
+
+
 
   return (
     <>
@@ -94,27 +126,29 @@ function HomePage() {
                 <div className="grid-item writing-prompt">
                   <h2>Need some inspiration?</h2>
                   <p>What’s one thing that made you smile today?</p>
-                
+
                   <form className="message-form" onSubmit={handleSubmit}>
-                  <div className="content-box">
-                    <label style={{fontWeight:'bolder', fontFamily:'serif'}}>What's on your mind?</label>
-                    <textarea
-                      name="content"
-                      value={message.content}
-                      onChange={(e) =>
-                        setMessage((prev) => ({
-                          ...prev,
-                          content: e.target.value,
-                        }))
-                      }
-                    ></textarea>
+                    <div className="content-box">
+                      <label
+                        style={{ fontWeight: "bolder", fontFamily: "serif" }}
+                      >
+                        What's on your mind?
+                      </label>
+                      <textarea
+                        name="content"
+                        value={message.content}
+                        onChange={(e) =>
+                          setMessage((prev) => ({
+                            ...prev,
+                            content: e.target.value,
+                          }))
+                        }
+                      ></textarea>
                     </div>
                     <div className="submit-btn">
-                    <button type="submit">Save</button>
+                      <button type="submit">Save</button>
                     </div>
                   </form>
-
-
                 </div>
 
                 {/* Recent Entries */}
@@ -159,7 +193,7 @@ function HomePage() {
                 {/* Achievements */}
                 <div className="grid-item achievements">
                   <h2>Your Achievements:</h2>
-                  <p>You've written 50 diary entries!</p>
+                  <p>You've written  {entriesCount}  diary entries! 🌺</p>
                   <p>Longest streak: 7 days</p>
                 </div>
 
@@ -167,7 +201,7 @@ function HomePage() {
                 <div className="grid-item calendar-widget">
                   <h2>Your Journal Calendar:</h2>
                   {/* Placeholder for Calendar Component */}
-                  <Calendar />
+                  <CalendarComponent   entryDates={entryDates} />
                 </div>
               </div>
             </>

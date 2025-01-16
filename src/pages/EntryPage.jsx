@@ -1,12 +1,17 @@
 import { useParams } from "react-router";
-import { getDiaryEntry } from "../utilities/diaryEntryService";
+import { getDiaryEntry,getDiaryEntryDates } from "../utilities/diaryEntryService";
 import { useState, useEffect } from "react";
 import Calendar from "react-calendar"; // Import the Calendar component
 import "react-calendar/dist/Calendar.css"; // Import the Calendar CSS - default calendar styling
 import NavBar from "../components/NavBar";
 
+
+
+
 function EntryPage() {
   const { id } = useParams(); // get the id from the URL
+  
+  const [error, setError] = useState(null);
   const [entry, setEntry] = useState({
     title: "",
     mood: "",
@@ -29,6 +34,7 @@ function EntryPage() {
   }, [id]); // add id as a dependency to the useEffect hook to re-run the effect when the id changes
 
   if (!entry) return <p>Loading...</p>;
+  
 
   return (
     <>
@@ -76,6 +82,7 @@ function EntryPage() {
         </p>
       </div>
     </div>
+      
     </>
   );
 }
