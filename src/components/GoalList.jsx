@@ -3,8 +3,8 @@ import React from 'react';
 const GoalList = ({ goals, onEdit, onDelete }) => {
   return (
     <div className="goal-list">
-      <h3 className='title'>Your Goals</h3>
-      {goals.length > 0 ? (
+      <h3 className='page-title'>Your Goals</h3>
+      { goals ? (
         goals.map((goal) => (
           <div key={goal._id} className="goal-item">
             <h4>{goal.title}</h4>
@@ -19,8 +19,8 @@ const GoalList = ({ goals, onEdit, onDelete }) => {
                 : '🌱 Low'}
             </p>
             <p>Status: {goal.status === 'completed' ? '✅ Completed' : '⏳ In Progress'}</p>
-            <button onClick={() => onEdit(goal)}>Edit</button>
-            <button onClick={() => onDelete(goal._id)}>Delete</button>
+            <button className='btn btn-primary' onClick={() => onEdit(goal)}>Edit</button>
+            <button  className=" btn btn-secondary" onClick={() => onDelete(goal._id)}>Delete</button>
           </div>
         ))
       ) : (

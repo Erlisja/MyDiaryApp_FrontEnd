@@ -7,7 +7,7 @@ const GoalFilters = ({ filter, setFilter }) => {
 
   return (
     <div className="goal-filters">
-      <h3>Filter Goals</h3>
+      <h3 className=''>Filter Goals</h3>
       <label htmlFor="priority">Priority:</label>
       <select value={filter} onChange={handleFilterChange}>
         <option value="all">All</option>

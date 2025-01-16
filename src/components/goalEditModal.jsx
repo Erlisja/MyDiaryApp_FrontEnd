@@ -7,7 +7,7 @@ const GoalEditModal = ({ show, onClose, children }) => {
   return (
     <div className="modal-overlay">
       <div className="modal-content">
-        <button className="modal-close" onClick={onClose}>
+        <button className="btn modal-close" onClick={onClose}>
           &times;
         </button>
         {children}

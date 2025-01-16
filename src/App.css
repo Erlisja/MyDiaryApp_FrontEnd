@@ -1040,7 +1040,7 @@ ul li {
 .react-calendar__tile {
   position: relative;
 }
-
+/* 
 .react-calendar__tile .dot {
   position: absolute;
   bottom: 5px;
@@ -1050,7 +1050,7 @@ ul li {
   border-radius: 50%;
   width: 8px;
   height: 8px;
-}
+} */
 
 /* Goal Edit Modal */
 .modal-overlay {
@@ -1100,18 +1100,6 @@ ul li {
   margin-bottom: 10px;
 }
 
-button {
-  padding: 8px 12px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-button:hover {
-  background-color: var(--accent-color);
-  color: #fff;
-}
-
 
 
 .clickable-dot {
@@ -1120,4 +1108,201 @@ button:hover {
   width: 10px;
   height: 10px;
   display: inline-block;
+}
+
+
+/* General Page Styling */
+.goals-page-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  background: url('/bckg1.jpg') no-repeat center center;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  font-family: 'Roboto', sans-serif;
+  min-height: 100vh;
+}
+
+/* Header Styling */
+.goals-page-header {
+  margin-bottom: 20px;
+}
+
+.page-title {
+  font-size: 3.5rem;
+  font-family: 'Parisienne', serif;
+  font-weight: bold;
+  color: var(--font-dark-color-2);
+  text-align: center;
+}
+.page-title h3{
+  color: var(--primary-color);
+}
+
+/* Layout for Form and Filters */
+.form-and-filters-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px; /* Space between the two sections */
+  width: 100%;
+  max-width: 800px;
+  margin-bottom: 20px;
+}
+
+.goal-form-section,
+.goal-filters-section {
+  flex: 1; /* Each section takes up equal width */
+  padding: 20px;
+  background-color: var(--card-bg-color);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+
+/* Goal List Section */
+.goal-list-section {
+  width: 100%;
+  max-width: 800px;
+  padding: 20px;
+  background-color: var(--card-bg-color);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  margin-top: 20px;
+}
+
+/* Form Elements */
+.form-group {
+  margin-bottom: 15px;
+}
+
+label {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 5px;
+}
+
+.form-control {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid var(--border-color);
+  border-radius: 5px;
+  font-size: 1rem;
+  background-color: var(--input-bg-color);
+  color: var(--text-color);
+}
+
+textarea.form-control {
+  resize: vertical;
+}
+
+button.btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button.btn-primary {
+  background-color: var(--primary-color);
+  color: #fff;
+}
+
+button.btn-primary:hover {
+  background-color: var(--primary-hover-color);
+}
+
+button.btn-secondary {
+  background-color: var(--secondary-color);
+  color: #fff;
+}
+
+button.btn-secondary:hover {
+  background-color: var(--secondary-hover-color);
+}
+
+
+/* Goal List Styling */
+.goal-list {
+  width: 100%;
+  max-width: 900px;
+  margin-top: 20px;
+  background-color: var(--background-color);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+
+
+/* Styling for individual goal items */
+.goal-item {
+  background-color: var(--card-bg-color);
+  padding: 20px;
+  margin-bottom: 15px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease-in-out, box-shadow 0.3s ease;
+}
+
+.goal-item:hover {
+  transform: scale(1.02);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+.goal-item h4 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--primary-color);
+  margin-bottom: 10px;
+}
+
+.goal-item p {
+  font-size: 1.1rem;
+  color: var(--text-color);
+  margin-bottom: 10px;
+}
+
+.goal-item p span {
+  font-weight: 600;
+}
+
+/* Button Styling */
+.goal-item button {
+  padding: 10px 15px;
+  border-radius: 5px;
+  font-size: 1rem;
+  margin-right: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.goal-item button:hover {
+  background-color: var(--button-hover-color);
+}
+
+.goal-item .btn-primary {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.goal-item .btn-secondary {
+  background-color: var(--secondary-color);
+  color: white;
+}
+
+.goal-item .btn-primary:hover {
+  background-color: var(--primary-hover-color);
+}
+
+.goal-item .btn-secondary:hover {
+  background-color: var(--secondary-hover-color);
+}
+
+/* Empty Goal List Message */
+.goal-list p {
+  font-size: 1.2rem;
+  color: var(--text-color);
+  text-align: center;
+  font-weight: 500;
 }

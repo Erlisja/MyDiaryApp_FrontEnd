@@ -90,124 +90,93 @@ const GoalsPage = () => {
   });
 
   return (
+    <>
+    <NavBar layout="horizontal" />
     <div className="goals-page-container">
-      <NavBar layout="horizontal" />
+     
+      <h1 className="page-title">Goals Page</h1>
   
-      <header className="goals-page-header">
-        <h1 className="page-title">Goals Page</h1>
-      </header>
+      {/* Form and Filters Container */}
+      <div className="form-and-filters-container">
+        {/* Goal Form */}
+        <div className="goal-form-section">
+          <GoalForm 
+            onSubmit={handleAddGoal}
+            editGoal={null} 
+            onEdit={() => {}} 
+          />
+        </div>
   
-      {/* Form for adding new goals */}
-      <section className="goal-form-section">
-        <GoalForm 
-          onSubmit={handleAddGoal}
-          editGoal={null}
-          onEdit={() => {}}
-        />
-      </section>
+        {/* Goal Filters */}
+        <div className="goal-filters-section">
+          <GoalFilters filter={filter} setFilter={setFilter} />
+        </div>
+      </div>
   
-      {/* Filter Component */}
-      <section className="goal-filters-section">
-        <GoalFilters filter={filter} setFilter={setFilter} />
-      </section>
-  
-      {/* List of Goals */}
-      <section className="goal-list-section">
+      {/* Goal List Section */}
+      <div className="goal-list-section">
         <GoalList 
-          goals={filteredGoals}
+          goals={filteredGoals} 
           onEdit={handleEditClick}
           onDelete={handleDeleteGoal}
         />
-      </section>
+      </div>
   
       {/* Edit Modal */}
-      {isModalOpen && (
-        <GoalEditModal show={isModalOpen} onClose={handleCloseModal}>
-          {currentGoal && (
-            <form
-              className="modal-form"
-              onSubmit={(e) => {
-                e.preventDefault();
-                const updatedGoal = {
-                  ...currentGoal,
-                  title: e.target.title.value,
-                  description: e.target.description.value,
-                  priority: e.target.priority.value,
-                  deadline: e.target.deadline.value,
-                  status: e.target.status.value,
-                };
-                handleGoalUpdate(updatedGoal);
-              }}
-            >
-              <div className="form-group">
-                <label htmlFor="title">Title:</label>
-                <input
-                  className="form-control"
-                  type="text"
-                  name="title"
-                  defaultValue={currentGoal.title}
-                  id="title"
-                />
-              </div>
-  
-              <div className="form-group">
-                <label htmlFor="description">Description:</label>
-                <textarea
-                  className="form-control"
-                  name="description"
-                  defaultValue={currentGoal.description}
-                  id="description"
-                />
-              </div>
-  
-              <div className="form-group">
-                <label htmlFor="priority">Priority:</label>
-                <select
-                  className="form-control"
-                  name="priority"
-                  defaultValue={currentGoal.priority}
-                  id="priority"
-                >
-                  <option value="High">High</option>
-                  <option value="Medium">Medium</option>
-                  <option value="Low">Low</option>
-                </select>
-              </div>
-  
-              <div className="form-group">
-                <label htmlFor="deadline">Deadline:</label>
-                <input
-                  className="form-control"
-                  type="date"
-                  name="deadline"
-                  defaultValue={currentGoal.deadline}
-                  id="deadline"
-                />
-              </div>
-  
-              <div className="form-group">
-                <label htmlFor="status">Status:</label>
-                <select
-                  className="form-control"
-                  name="status"
-                  defaultValue={currentGoal.status}
-                  id="status"
-                >
-                  <option value="completed">Completed</option>
-                  <option value="incomplete">Incomplete</option>
-                </select>
-              </div>
-  
-              <div className="modal-actions">
-                <button className="btn btn-primary" type="submit">Update Goal</button>
-                <button className="btn btn-secondary" onClick={handleCloseModal}>Cancel</button>
-              </div>
-            </form>
-          )}
-        </GoalEditModal>
-      )}
+      <GoalEditModal show={isModalOpen} onClose={handleCloseModal}>
+        {currentGoal && (
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              const updatedGoal = {
+                ...currentGoal,
+                title: e.target.title.value,
+                description: e.target.description.value,
+                priority: e.target.priority.value,
+                deadline: e.target.deadline.value,
+                status: e.target.status.value,
+              };
+              handleGoalUpdate(updatedGoal);
+            }}
+          >
+            <div className="form-group">
+              <label>Title:</label>
+              <input type="text" name="title" defaultValue={currentGoal.title} className="form-control" />
+            </div>
+            <div className="form-group">
+              <label>Description:</label>
+              <textarea name="description" defaultValue={currentGoal.description} className="form-control" />
+            </div>
+            <div className="form-group">
+              <label>Priority:</label>
+              <select name="priority" defaultValue={currentGoal.priority} className="form-control">
+                <option value="High">High</option>
+                <option value="Medium">Medium</option>
+                <option value="Low">Low</option>
+              </select>
+            </div>
+            <div className="form-group">
+              <label>Deadline:</label>
+              <input type="date" name="deadline" defaultValue={currentGoal.deadline} className="form-control" />
+            </div>
+            <div className="form-group">
+              <label>Status:</label>
+              <select name="status" defaultValue={currentGoal.status} className="form-control">
+                <option value="completed">Completed</option>
+                <option value="incomplete">Incomplete</option>
+              </select>
+            </div>
+            <div className="modal-actions">
+              <button type="submit" className="btn btn-primary">Update Goal</button>
+              <button onClick={handleCloseModal} className="btn btn-secondary">Cancel</button>
+            </div>
+          </form>
+        )}
+      </GoalEditModal>
     </div>
+    </> 
   );
+
 };
 
 export default GoalsPage;
