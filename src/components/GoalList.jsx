@@ -9,16 +9,16 @@ const GoalList = ({ goals, onEdit, onDelete }) => {
           <div key={goal._id} className="goal-item">
             <h4>{goal.title}</h4>
             <p>{goal.description}</p>
-            <p>Deadline: {new Date(goal.deadline).toLocaleDateString()}</p>
+            <p><strong>Deadline:{' '} </strong>{new Date(goal.deadline).toLocaleDateString()}</p>
             <p>
-              Priority:{' '}
+              <strong>Priority:{' '}</strong>
               {goal.priority === 'High'
                 ? '🔥 High'
                 : goal.priority === 'Medium'
                 ? '⚖️ Medium'
                 : '🌱 Low'}
             </p>
-            <p>Status: {goal.status === 'completed' ? '✅ Completed' : '⏳ In Progress'}</p>
+            <p><strong>Status:{' '}</strong> {goal.status === 'completed' ? '✅ Completed' : '⏳ In Progress'}</p>
             <button className='btn btn-primary' onClick={() => onEdit(goal)}>Edit</button>
             <button  className=" btn btn-secondary" onClick={() => onDelete(goal._id)}>Delete</button>
           </div>

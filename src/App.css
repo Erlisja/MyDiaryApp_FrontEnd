@@ -1157,7 +1157,62 @@ ul li {
   background-color: var(--card-bg-color);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
+  border: 1px solid  #BFB2AA;
 }
+
+.goal-filters-section label{
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--font-dark-color-2);
+  margin-bottom: 10px;
+  margin-top: 20px;
+  font-family: 'Bodoni Moda', serif;
+}
+.goal-filters-section select{
+  width: 100%;
+  padding: 10px;
+  border: 1px solid var(--border-color);
+  border-radius: 5px;
+  font-size: 1rem;
+  background-color: var(--input-bg-color);
+  color: var(--text-color);
+}
+.goal-form-section label{
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--font-dark-color-2);
+  font-family: 'Bodoni Moda', serif;
+}
+
+.goal-form-section input{
+  width: 100%;
+  padding: 10px;
+  border: 1px solid var(--border-color);
+  border-radius: 5px;
+  font-size: 1rem;
+  background-color: var(--input-bg-color);
+  color: var(--text-color);
+}
+
+.goal-form-section textarea{
+  width: 100%;
+  padding: 10px;
+  border: 1px solid var(--border-color);
+  border-radius: 5px;
+  font-size: 1rem;
+  background-color: var(--input-bg-color);
+  color: var(--text-color);
+}
+.goal-form-section select{
+  width: 100%;
+  padding: 10px;
+  border: 1px solid var(--border-color);
+  border-radius: 5px;
+  font-size: 1rem;
+  background-color: var(--input-bg-color);
+  color: var(--text-color);
+}
+
 
 /* Goal List Section */
 .goal-list-section {
@@ -1206,11 +1261,11 @@ button.btn {
 
 button.btn-primary {
   background-color: var(--primary-color);
-  color: #fff;
+  color: #ffffff;
 }
 
 button.btn-primary:hover {
-  background-color: var(--primary-hover-color);
+  background-color: var(--third-color);
 }
 
 button.btn-secondary {
@@ -1219,7 +1274,7 @@ button.btn-secondary {
 }
 
 button.btn-secondary:hover {
-  background-color: var(--secondary-hover-color);
+  background-color: var(--sixth-color);
 }
 
 
@@ -1244,6 +1299,11 @@ button.btn-secondary:hover {
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
   transition: transform 0.2s ease-in-out, box-shadow 0.3s ease;
+}
+
+
+.goal-list-section{
+   border: 1px solid  #BFB2AA;
 }
 
 .goal-item:hover {
@@ -1276,28 +1336,14 @@ button.btn-secondary:hover {
   margin-right: 10px;
   transition: background-color 0.3s ease;
 }
-
-.goal-item button:hover {
-  background-color: var(--button-hover-color);
+.goal-item h4{
+  color: var(--font-dark-color-2);
+  font-style: italic;
+  font-weight: 400;
+  text-decoration: underline;
 }
 
-.goal-item .btn-primary {
-  background-color: var(--primary-color);
-  color: white;
-}
 
-.goal-item .btn-secondary {
-  background-color: var(--secondary-color);
-  color: white;
-}
-
-.goal-item .btn-primary:hover {
-  background-color: var(--primary-hover-color);
-}
-
-.goal-item .btn-secondary:hover {
-  background-color: var(--secondary-hover-color);
-}
 
 /* Empty Goal List Message */
 .goal-list p {
@@ -1306,3 +1352,12 @@ button.btn-secondary:hover {
   text-align: center;
   font-weight: 500;
 }
+.goal-form-section button{
+  margin-top: 20px;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
