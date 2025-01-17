@@ -65,7 +65,7 @@ const TimelinePage = () => {
 
   return (
     <>
-      <NavBar />
+      <NavBar  />
       <div className="timeline-page-container">
         <h1 className="title">Timeline Page</h1>
         <div className="timeline">

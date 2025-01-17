@@ -61,11 +61,6 @@ function NavBar({ layout, handleLogOut }) {
               </Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/entry/:id">
-                Diary Entry
-              </Link>
-            </li>
-            <li className="nav-item">
               <Link className="nav-link" to="/affirmations">
                 Affirmations
               </Link>
@@ -94,4 +89,4 @@ function NavBar({ layout, handleLogOut }) {
   );
 }
 
-export default NavBar;
+export default  NavBar;
