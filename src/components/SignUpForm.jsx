@@ -2,6 +2,7 @@ import { signUpUser } from "../utilities/users-services";
 import { useState } from "react";
 import { useNavigate } from "react-router";
 import PopUpWindow from "./PopUpWindow";
+import { Eye, EyeSlash } from "react-bootstrap-icons"; // Import Bootstrap Icons
 
 function SignUpForm(props) {
   //  create a state to store the form data
@@ -13,9 +14,9 @@ function SignUpForm(props) {
   });
 
   const [error, setError] = useState(""); // set the error message to an empty string
-  
-  const [isPopUpOpen, setIsPopUpOpen] = useState(false); // set the isPopUpOpen state to false to hide the pop up window
 
+  const [isPopUpOpen, setIsPopUpOpen] = useState(false); // set the isPopUpOpen state to false to hide the pop up window
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value }); // this line of code is used to update the state of the form data when the user types in the input field
@@ -43,17 +44,23 @@ function SignUpForm(props) {
   };
 
   const navigate = useNavigate();
-
   function handleBack() {
     navigate("/");
   }
 
+  // Toggle password visibility
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
   return (
     <>
       <div className="auth-page">
-      <div className="auth-card">
-        <button className="auth-back-arrow"  onClick={handleBack}>⬅︎</button>
-      <h2>Sign Up </h2>
+        <div className="auth-card">
+          <button className="auth-back-arrow" onClick={handleBack}>
+            ⬅︎
+          </button>
+          <h2>Sign Up </h2>
 
           <form autoComplete="off" onSubmit={handleSubmit}>
             <label for="username">Username</label>
@@ -77,38 +84,62 @@ function SignUpForm(props) {
             />
             <br />
             <label for="password">Password</label>
-            <input
-              type="password"
-              name="password"
-              value={formData.password}
-              onChange={handleChange}
-              placeholder="Enter your password"
-              minLength={4}
-              required
-            />
-            <br />
+            <div className=" password-container">
+              <input
+                type={showPassword ? "text" : "password"}
+                name="password"
+                value={formData.password}
+                onChange={handleChange}
+                placeholder="Enter your password"
+                required
+              />
+              <button
+                type="button"
+                id="togglePassword"
+                aria-label="Toggle password visibility"
+                onClick={togglePasswordVisibility}
+                className="password-toggle-btn"
+              >
+                {showPassword ? <Eye /> : <EyeSlash />} {/* Icons */}
+              </button>
+            </div>
+            <br /> 
             <label for="password">Confirm Password</label>
-            <input
-              type="password"
-              name="confirmPassword"
-              value={formData.confirmPassword}
-              onChange={handleChange}
-              placeholder="Confirm your password"
-              minLength={4}
-              required
-            />
+            <div className="password-container">
+             
+              <br />
+              <input
+                type="password"
+                name="confirmPassword"
+                value={formData.confirmPassword}
+                onChange={handleChange}
+                placeholder="Confirm your password"
+                minLength={4}
+                required
+              />
+              <button
+                type="button"
+                id="togglePassword"
+                aria-label="Toggle password visibility"
+                onClick={togglePasswordVisibility}
+                className="password-toggle-btn"
+              >
+                {showPassword ? <Eye /> : <EyeSlash />} {/* Icons */}
+              </button>
+            </div>
+
             <br />
             <br />
             <button type="submit">Sign Up</button>
             <br />
           </form>
-           {/* Render Popup */}
-      {isPopUpOpen && (
-        <PopUpWindow
-          message="Sign up successful! 
-           You can now log in with your credentials." 
-        /> // this line of code is used to render the PopUpWindow component when the isPopUpOpen state is true
-      )}
+          {/* Render Popup */}
+          {isPopUpOpen && (
+            <PopUpWindow
+              message="Sign up successful! 
+           You can now log in with your credentials."
+            /> // this line of code is used to render the PopUpWindow component when the isPopUpOpen state is true
+          )}
           <p>{error}</p>
         </div>
       </div>

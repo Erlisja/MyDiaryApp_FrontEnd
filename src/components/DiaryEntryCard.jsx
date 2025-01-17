@@ -92,11 +92,14 @@ function DiaryEntryCard({ entry, onDelete, onUpdate }) {
           <br />
           <label>Mood:</label>
           <select name="mood" value={updatedEntry.mood} onChange={handleChange}>
-            <option value="happy">Happy</option>
-            <option value="sad">Sad</option>
-            <option value="angry">Angry</option>
-            <option value="surprised">Surprised</option>
-            <option value="neutral">Neutral</option>
+            <option value="">Select Mood</option>
+            <option value="happy">😁 Happy</option>
+            <option value="love">😍 Loved</option>
+            <option value="excited">😃 Excited</option>
+            <option value="sad">😔 Sad</option>
+            <option value="angry">😡 Angry</option>
+            <option value="surprised">😲 Surprised</option>
+            <option value="neutral">😐 Neutral</option>
           </select>
           <br />
           <br />

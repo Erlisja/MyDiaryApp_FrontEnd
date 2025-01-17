@@ -11,18 +11,15 @@ const DailyDiaryPage = () => {
     title: "",
     content: "",
     tags: "",
-    mood: "happy",
+    mood: "",
     isFavorite: false,
-    createdAt: new Date().toISOString().split("T")[0], // Default to today
+    createdAt: new Date().toISOString().split("T")[0],
   });
 
   // Define the handleChange function to update the form data
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
+    setFormData((prevData) => ({ ...prevData, [name]: value }));
   };
 
   // Define the handleSubmit function to add a new diary entry
@@ -72,15 +69,19 @@ const DailyDiaryPage = () => {
             {/* Calendar Component */}
 
             <div className="calendar-div">
-              <Calendar
-                value={new Date(formData.createdAt)}
-                onChange={(date) =>
-                  setFormData((prevData) => ({
-                    ...prevData,
-                    createdAt: date.toISOString().split("T")[0],
-                  }))
-                }
-              />
+              {formData.createdAt && (
+                <Calendar
+                  value={new Date(formData.createdAt)} // Ensure this is in local time
+                  onChange={(date) => {
+                    console.log("Selected date:", date); // Pass raw date
+                    setFormData((prevData) => ({
+                      ...prevData,
+                      createdAt: date,
+                    }));
+                  }}
+                  
+                />
+              )}
             </div>
 
             {/* Mood and Tags */}
@@ -92,11 +93,14 @@ const DailyDiaryPage = () => {
                   value={formData.mood}
                   onChange={handleChange}
                 >
-                  <option value="happy">Happy</option>
-                  <option value="sad">Sad</option>
-                  <option value="angry">Angry</option>
-                  <option value="surprised">Surprised</option>
-                  <option value="neutral">Neutral</option>
+                  <option value="">Select Mood</option>
+                  <option value="happy">😁 Happy</option>
+                  <option value="love">😍 Loved</option>
+                  <option value="excited">😃 Excited</option>
+                  <option value="sad">😔 Sad</option>
+                  <option value="angry">😡 Angry</option>
+                  <option value="surprised">😲 Surprised</option>
+                  <option value="neutral">😐 Neutral</option>
                 </select>
               </div>
               <div>

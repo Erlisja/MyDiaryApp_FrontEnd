@@ -11,7 +11,7 @@ function CalendarComponent({ entryDates }) {
 
   const tileContent = ({ date, view }) => {
     // Check if the current date is in the entryDates array
-    const formattedDate = date.toISOString().split("T")[0]; // Format the date as YYYY-MM-DD
+    const formattedDate = date.toISOString().split("T")[0]; 
     if (dateValues.some((entryDate) => entryDate.toISOString().split("T")[0] === formattedDate)) {
       return <div style={{ width: '5px', height: '5px', borderRadius: '50%', backgroundColor: 'red', margin: 'auto' }} />;
     }

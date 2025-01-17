@@ -2,8 +2,10 @@ import React, { useState, useEffect } from "react";
 import NavBar from "../components/NavBar";
 import { updateUserInfo } from "../utilities/users-api";
 import { getUser } from "../utilities/users-services";
+import { Eye, EyeSlash } from "react-bootstrap-icons"; // Import Bootstrap Icons
 
 const ProfilePage = () => {
+  const [showPassword, setShowPassword] = useState(false);
   const [user, setUser] = useState({ username: "", email: "" });
   const [isEditing, setIsEditing] = useState(false);
   const [formData, setFormData] = useState({
@@ -98,6 +100,11 @@ const ProfilePage = () => {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
+  // Toggle password visibility
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
   return (
     <>
       <NavBar layout={"vertical"} />
@@ -143,8 +150,8 @@ const ProfilePage = () => {
                   />
                 </label>
 
-                <label>
-                  Current Password:
+                <label>Current Password: </label>
+                <div className="password-container1">
                   <input
                     type="password"
                     name="currentPassword"
@@ -152,21 +159,38 @@ const ProfilePage = () => {
                     onChange={handleChange}
                     placeholder="Enter current password"
                   />
-                </label>
-
-                <label>
-                  New Password:
+                  <button
+                    type="button"
+                    id="togglePassword"
+                    aria-label="Toggle password visibility"
+                    onClick={togglePasswordVisibility}
+                    className="password-toggle-btn"
+                  >
+                    {showPassword ? <Eye /> : <EyeSlash />} {/* Icons */}
+                  </button>
+                </div>
+                <label>New Password: </label>
+                <div className="password-container1">
                   <input
-                    type="password"
+                    type={showPassword ? "text" : "password"}
                     name="newPassword"
                     value={formData.newPassword}
                     onChange={handleChange}
                     placeholder="Enter new password"
                   />
-                </label>
+                  <button
+                    type="button"
+                    id="togglePassword"
+                    aria-label="Toggle password visibility"
+                    onClick={togglePasswordVisibility}
+                    className="password-toggle-btn"
+                  >
+                    {showPassword ? <Eye /> : <EyeSlash />} {/* Icons */}
+                  </button>
+                </div>
 
-                <label>
-                  Confirm New Password:
+                <label>Confirm New Password: </label>
+                <div className="password-container1">
                   <input
                     type="password"
                     name="confirmNewPassword"
@@ -174,7 +198,16 @@ const ProfilePage = () => {
                     onChange={handleChange}
                     value={formData.confirmNewPassword}
                   />
-                </label>
+                  <button
+                    type="button"
+                    id="togglePassword"
+                    aria-label="Toggle password visibility"
+                    onClick={togglePasswordVisibility}
+                    className="password-toggle-btn"
+                  >
+                    {showPassword ? <Eye /> : <EyeSlash />} {/* Icons */}
+                  </button>
+                </div>
 
                 <div className="modal-actions">
                   <button
