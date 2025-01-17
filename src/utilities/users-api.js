@@ -25,19 +25,49 @@ export async function signUpUser(userData) {
 }
 
 
-// export the function to log in a user to the API
+
 export async function logInUser(credentials) {
     const response = await fetch(URL + '/login', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify(credentials) // convert the user data to JSON
-    })
-    // check if the response is OK 
+        body: JSON.stringify(credentials)
+    });
+
     if (response.ok) {
-        return response.json();
+        const { token, user } = await response.json();
+        localStorage.setItem('token', token);
+        return user;  // Return the user object directly here
     } else {
         throw new Error('An error occurred. Please try again');
+    }
+}
+
+
+
+export async function updateUserInfo(userData) {
+    try {
+        const response = await fetch(URL + '/update', {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${localStorage.getItem("token")}`, // Include token for authentication
+            },
+            body: JSON.stringify(userData)
+        });
+
+        if (!response.ok) {
+            if (response.status === 401 || response.status === 403) {
+                throw new Error("Unauthorized or Forbidden: Token might be invalid or expired");
+            }
+            throw new Error("Failed to update user information");
+        }
+
+        const updatedUser = await response.json();
+        return updatedUser;
+    } catch (error) {
+        console.error("Error updating user info:", error);
+        throw error;
     }
 }

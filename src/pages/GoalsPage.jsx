@@ -7,6 +7,7 @@ import GoalEditModal from '../components/GoalEditModal';
 import { addNewGoal, getAllGoals, deleteGoalEntry, updateGoalEntry} from '../utilities/goalsEntryService'; // Ensure the edit function is imported
 import NavBar from '../components/NavBar';
 
+
 const GoalsPage = () => {
   const [goals, setGoals] = useState([]);
   const [filter, setFilter] = useState('all');
@@ -16,13 +17,13 @@ const GoalsPage = () => {
   // Fetch goals when the component mounts
   useEffect(() => {
     fetchGoals();
-  }, []);
+  },[]);
 
   // Function to fetch all goals
   const fetchGoals = async () => {
     try {
-      const response = await getAllGoals(); // Assuming it fetches data from an API
-      setGoals(response);
+      const response = await getAllGoals(); // Call the getAllGoals function to fetch all goals
+      setGoals(response); // Set the goals in the state variable
     } catch (error) {
       console.error('Error fetching goals:', error);
     }
@@ -32,7 +33,7 @@ const GoalsPage = () => {
   const handleAddGoal = async (goal) => {
     try {
       await addNewGoal(goal);
-      fetchGoals();
+      fetchGoals();  //Refetch the goals after adding a new goal
     } catch (error) {
       console.error('Error adding goal:', error);
     }
@@ -41,8 +42,8 @@ const GoalsPage = () => {
   // Delete a goal
   const handleDeleteGoal = async (id) => {
     try {
-      await deleteGoalEntry(id);
-      fetchGoals();
+      await deleteGoalEntry(id); // Call the deleteGoalEntry function to delete the goal
+      fetchGoals();             // Refetch the goals after deleting a goal
     } catch (error) {
       console.error('Error deleting goal:', error);
     }
@@ -60,16 +61,20 @@ const GoalsPage = () => {
     setCurrentGoal(null); // Clear the selected goal
   };
 
+
   // Update the goal
-  const handleGoalUpdate = async (updatedGoal) => {
+  const handleGoalUpdate = async (id, updatedGoal) => {
     try {
-      await updateGoalEntry(updatedGoal); // Use the correct function to update the goal
-      fetchGoals();
-      handleCloseModal();
-    } catch (error) {
+      await updateGoalEntry(id, updatedGoal); // Update the goal in the backend
+    await fetchGoals(); // Wait for goals to be refetched
+    setIsModalOpen(false); // Close the modal only after fetch completes
+    setCurrentGoal(null); // Clear the current goal state
+    }
+    catch (error) {
       console.error('Error updating goal:', error);
     }
   };
+  
 
   // Filter goals based on the selected filter
   const filteredGoals = goals.filter((goal) => {
@@ -102,8 +107,6 @@ const GoalsPage = () => {
         <div className="goal-form-section">
           <GoalForm 
             onSubmit={handleAddGoal}
-            editGoal={null} 
-            onEdit={() => {}} 
           />
         </div>
   
@@ -136,7 +139,12 @@ const GoalsPage = () => {
                 deadline: e.target.deadline.value,
                 status: e.target.status.value,
               };
-              handleGoalUpdate(updatedGoal);
+              handleGoalUpdate(currentGoal._id, updatedGoal);
+              fetchGoals();
+              if (e.target.status.value === 'completed') {
+                alert('Congratulations on completing your goal!');
+              }
+              handleCloseModal();
             }}
           >
             <div className="form-group">
@@ -167,7 +175,7 @@ const GoalsPage = () => {
               </select>
             </div>
             <div className="modal-actions">
-              <button type="submit" className="btn btn-primary">Update Goal</button>
+              <button type='submit' className="btn btn-primary">Update Goal</button>
               <button onClick={handleCloseModal} className="btn btn-secondary">Cancel</button>
             </div>
           </form>

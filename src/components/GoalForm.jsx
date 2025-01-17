@@ -7,19 +7,21 @@ const GoalForm = ({ onSubmit }) => {
     description: "",
     deadline: "",
     priority: "Medium",
+    status: "incomplete",
   });
 
-  // Populate form if editing an existing goal
-  useEffect(() => {
-    if (editGoal) {
-      setFormData({
-        title: editGoal.title,
-        description: editGoal.description,
-        deadline: editGoal.deadline,
-        priority: editGoal.priority,
-      });
-    }
-  }, [editGoal]);
+  // // Populate form if editing an existing goal
+  // useEffect(() => {
+  //   if (editGoal) {
+  //     setFormData({
+  //       title: editGoal.title,
+  //       description: editGoal.description,
+  //       deadline: editGoal.deadline,
+  //       priority: editGoal.priority,
+  //       status: editGoal.status,
+  //     });
+  //   }
+  // }, [editGoal]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -34,6 +36,7 @@ const GoalForm = ({ onSubmit }) => {
       description: "",
       deadline: "",
       priority: "Medium",
+      status: "incomplete",
     });
     setEditGoal(null); // Clear edit state
   };
@@ -54,6 +57,7 @@ const GoalForm = ({ onSubmit }) => {
           />
           <label>Description:</label>
           <textarea
+            type="text"
             name="description"
             placeholder="Description"
             value={formData.description}

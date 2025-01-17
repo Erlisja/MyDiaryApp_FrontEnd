@@ -12,6 +12,7 @@ import LoginForm from "./components/LoginForm";
 import SignUpForm from "./components/SignUpForm";
 import EntryPage from "./pages/EntryPage";
 import GoalsPage from "./pages/GoalsPage";
+import ProfilePage from "./pages/ProfilePage";
 
 import "./App.css";
 
@@ -29,11 +30,9 @@ function App() {
             <Route path="/login" element={<LoginForm setUser={setUser} />} />
             <Route path="/signup" element={<SignUpForm setUser={setUser} />} />
             <Route path="/goals" element={<GoalsPage />} />
-{/* 
-            <Route path="/profile" element={<ProfilePage />} /> */}
+            <Route path="/profile" element={<ProfilePage />} />
             <Route path="/" element={<WelcomePage />} />
             <Route path="/entry/:id" element={<EntryPage />} />
-       
           </Routes>
         </>
       ) : (
