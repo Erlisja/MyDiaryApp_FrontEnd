@@ -1,7 +1,7 @@
 //users-api.js
 
 // set up the base URL for the API
-const LOCAL_URL = 'https://memoire-rust.vercel.app/' || 'http://localhost:3030';
+const LOCAL_URL = 'https://memoire-server.onrender.com' || 'http://localhost:3030';
 const API_URL = '/api/users';
 const URL = LOCAL_URL + API_URL;
 

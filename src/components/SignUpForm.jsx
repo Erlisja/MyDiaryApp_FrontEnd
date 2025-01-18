@@ -18,6 +18,7 @@ function SignUpForm(props) {
   const [isPopUpOpen, setIsPopUpOpen] = useState(false); // set the isPopUpOpen state to false to hide the pop up window
   const [showPassword, setShowPassword] = useState(false);
 
+
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value }); // this line of code is used to update the state of the form data when the user types in the input field
     setError(""); // this line of code is used to clear the error message when the user types in the input field
@@ -48,7 +49,6 @@ function SignUpForm(props) {
     navigate("/");
   }
 
-  // Toggle password visibility
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
