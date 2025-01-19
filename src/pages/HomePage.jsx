@@ -8,6 +8,7 @@ import NavBar from "../components/NavBar";
 import { Link } from "react-router";
 import "react-calendar/dist/Calendar.css";
 import CalendarComponent from "../components/CalendarComponent";
+import AffirmationComponent from "../components/AffirmationComponent";
 
 
 
@@ -196,17 +197,11 @@ useEffect(()=>{
                   )}
                 </div>
 
-                {/* Mood Tracker */}
-                <div className="grid-item mood-tracker">
-                  <h2>How are you feeling today?</h2>
-                  <div className="mood-buttons">
-                    <button>😊 Happy</button>
-                    <button>😢 Sad</button>
-                    <button>😡 Stressed</button>
-                    <button>😌 Relaxed</button>
-                  </div>
-                </div>
-
+              <div className="grid-item mood-tracker">
+                <AffirmationComponent />
+              </div>
+       
+    
                 {/* Achievements */}
                 <div className="grid-item achievements">
                   <h2>Your Achievements:</h2>
