@@ -1504,3 +1504,35 @@ button.password-toggle-btn:hover {
   color: gray;
   background-color:transparent;
 }
+
+/* Affirmation Page Styling */
+
+/* App.css or your preferred stylesheet */
+.affirmation-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.affirmation {
+  font-size: 1.5em;
+  margin: 20px 0;
+  font-weight: bold;
+  text-align: center;
+}
+
+button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
