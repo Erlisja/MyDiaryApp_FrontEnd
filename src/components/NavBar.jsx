@@ -2,7 +2,16 @@ import { Link } from "react-router";
 import { logOut } from "../utilities/users-services";
 import { getUser } from "../utilities/users-services";
 import { useState, useEffect } from "react";
-import {House, Book,Calendar4Week,Feather, PinMap,Person,PersonCircle, BoxArrowLeft} from "react-bootstrap-icons";
+import {
+  House,
+  Book,
+  Calendar4Week,
+  Feather,
+  PinMap,
+  Person,
+  PersonCircle,
+  BoxArrowLeft,
+} from "react-bootstrap-icons";
 
 function NavBar({ layout, handleLogOut }) {
   const [user, setUser] = useState(getUser());
@@ -26,7 +35,7 @@ function NavBar({ layout, handleLogOut }) {
     >
       <div className="container-fluid">
         <Link className="navbar-brand" to="/home">
-          Memoire
+          Mémoire
         </Link>
         <button
           className="navbar-toggler"
@@ -48,48 +57,44 @@ function NavBar({ layout, handleLogOut }) {
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             <li className="nav-item">
               <Link className="nav-link" to="/home">
-                <House/> Home
+                <House /> Home
               </Link>
             </li>
             <li className="nav-item">
               <Link className="nav-link" to="/daily-diary">
-               <Book/> Diary
+                <Book /> Diary
               </Link>
             </li>
             <li className="nav-item">
               <Link className="nav-link" to="/timeline">
-               <Calendar4Week/> Timeline
+                <Calendar4Week /> Timeline
               </Link>
             </li>
             <li className="nav-item">
               <Link className="nav-link" to="/manifestations">
-               <Feather/> Manifestations
+                <Feather /> Manifestations
               </Link>
             </li>
             <li className="nav-item">
               <Link className="nav-link" to="/goals">
-               <PinMap/> Goals
+                <PinMap /> Goals
               </Link>
             </li>
             <li className="nav-item">
               <Link className="nav-link" to="/profile">
-               <Person/> Profile
+                <Person /> Profile
               </Link>
             </li>
-        <li className="nav-item1">
-          <Link
-            to="/login"
-            className="nav-link"
-            onClick={handleLogOut}
-          >
-           <BoxArrowLeft/> Log Out
-          </Link>
-        </li>
-           </ul>
+            <li className="nav-item1">
+              <Link to="/login" className="nav-link" onClick={handleLogOut}>
+                <BoxArrowLeft /> Log Out
+              </Link>
+            </li>
+          </ul>
         </div>
       </div>
     </nav>
   );
 }
 
-export default  NavBar;
+export default NavBar;

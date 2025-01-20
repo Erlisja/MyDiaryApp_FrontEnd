@@ -1,7 +1,7 @@
 import axios from "axios";
 
 // set up the base URL for the API
- const LOCAL_URL = 'https://memoire-server.onrender.com'; 
+const LOCAL_URL = 'https://Memoire-server.onrender.com'; 
 //const LOCAL_URL = 'http://localhost:3030';
 const API_URL = '/api/goal-entries';
 const URL = LOCAL_URL + API_URL;
@@ -89,29 +89,29 @@ export async function deleteGoalEntry(id) {
 
 // export the function to update a goal entry in the API
 export async function updateGoalEntry(id, entryData) {
-   try{
-         const token = localStorage.getItem('token');
-         if (!token) {
-              throw new Error('No token found. Please log in.');
-         }
-            const response = fetch (URL + `/${id}`, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                    Authorization: `Bearer ${token}`,
-                },
-                body: JSON.stringify(entryData)
-            });
-            console.log('Response Status:', response.status);
-            if (response.ok) {
-                return await response.json();
-            } else {
-                throw new Error('Failed to update goal entry: ' + response.statusText);
-            }
-   }catch (err) {
+    try {
+        const token = localStorage.getItem('token');
+        if (!token) {
+            throw new Error('No token found. Please log in.');
+        }
+        const response = fetch(URL + `/${id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`,
+            },
+            body: JSON.stringify(entryData)
+        });
+        console.log('Response Status:', response.status);
+        if (response.ok) {
+            return await response.json();
+        } else {
+            throw new Error('Failed to update goal entry: ' + response.statusText);
+        }
+    } catch (err) {
         console.error('Fetch Error:', err.message);
         throw err;
-   }
+    }
 }
 
 // export the function to get a single goal entry from the API

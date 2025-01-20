@@ -61,10 +61,10 @@ const ProfilePage = () => {
       return;
     }
 
-    if (!formData.newPassword || formData.newPassword.length < 8) {
-      alert("New password must be at least 8 characters long.");
-      return;
-    }
+    // if (!formData.newPassword || formData.newPassword.length < 8) {
+    //   alert("New password must be at least 8 characters long.");
+    //   return;
+    // }
 
     if (formData.newPassword !== formData.confirmNewPassword) {
       alert("New password and confirm password do not match.");
@@ -84,6 +84,8 @@ const ProfilePage = () => {
       setUser(updatedUser); // Update the user in state
       setIsEditing(false); // Close the edit form
       alert("Profile updated successfully!");
+      //refresh the page
+      window.location.reload();
   
 
 

@@ -2,7 +2,7 @@
 import axios from "axios";
 
 // set up the base URL for the API
- const LOCAL_URL = 'https://memoire-server.onrender.com';
+const LOCAL_URL = 'https://Memoire-server.onrender.com';
 //const LOCAL_URL = 'http://localhost:3030';
 const API_URL = '/api/diary-entries';
 const URL = LOCAL_URL + API_URL;
@@ -113,10 +113,10 @@ export async function updateDiaryEntry(id, updatedData) {
 export async function getDiaryEntry(id) {
     const response = await fetch(URL + `/${id}`, {
         method: 'GET',
-        headers: {    
+        headers: {
             'Content-Type': 'application/json',
             Authorization: `Bearer ${localStorage.getItem('token')}`,
-            
+
         }
     })
     // check if the response is OK
@@ -184,7 +184,7 @@ export async function getDiaryEntryCount() {
 }
 
 
-export async function getDiaryEntryDates(){
+export async function getDiaryEntryDates() {
     try {
         const token = localStorage.getItem('token'); // Retrieve token from localStorage
         if (!token) {
