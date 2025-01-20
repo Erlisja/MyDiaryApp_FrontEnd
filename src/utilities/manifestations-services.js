@@ -20,7 +20,7 @@ export async function fetchAllManifestations() {
                 'Content-Type': 'application/json',
             },
         });
-        console.log('Response status', response.status);
+        // console.log('Response status', response.status);
         if (response.ok) {
             return await response.json()
         } else {
@@ -49,7 +49,7 @@ export async function deleteManifestation(id) {
                 'Content-Type': 'application/json',
             },
         });
-        console.log('Response Status:', response.status);
+        // console.log('Response Status:', response.status);
         if (response.ok) {
             return await response.json();
         } else {

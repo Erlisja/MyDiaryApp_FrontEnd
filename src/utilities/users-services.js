@@ -6,7 +6,7 @@ export async function signUpUser(userData) {
     // call the signUpUser function from the users-api file
     // this will make a POST request to the API to sign up the user
     const token = await usersAPI.signUpUser(userData);
-    console.log('Sign Up Token:', token);
+    // console.log('Sign Up Token:', token);
     localStorage.setItem('token', token);
     return getUser();  // Get user info after sign up
 }
@@ -21,7 +21,7 @@ export async function login(credentials) {
     // call the logInUser function from the users-api file
     // this will make a POST request to the API to log in the user
     const response = await usersAPI.logInUser(credentials);
-    console.log('Full response:', response);
+    // console.log('Full response:', response);
     const token = response.token;  // Extract the token
     if (token) {
         localStorage.setItem('token', token);  // Save the token if available
@@ -37,7 +37,7 @@ export async function login(credentials) {
 export function getToken() {
     // Get the token from localStorage
     const token = localStorage.getItem('token');
-    console.log('The token:', token);  // Log the token to check if it's correct
+    // console.log('The token:', token);  // Log the token to check if it's correct
 
     // If there is no token, return null
     if (!token) {
