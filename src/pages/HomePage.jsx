@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { getUser } from "../utilities/users-services";
-import { getLastDiaryEntries, getDiaryEntryDates,getDiaryEntryCount } from "../utilities/diaryEntryService";
+import {
+  getLastDiaryEntries,
+  getDiaryEntryDates,
+  getDiaryEntryCount,
+} from "../utilities/diaryEntryService";
 import { getGoalCount } from "../utilities/goalsEntryService";
 import diaryEntryService from "../utilities/diaryEntryService";
 import { jwtDecode } from "jwt-decode";
@@ -10,18 +14,12 @@ import "react-calendar/dist/Calendar.css";
 import CalendarComponent from "../components/CalendarComponent";
 import AffirmationComponent from "../components/AffirmationComponent";
 
-
-
-
 function HomePage() {
   const [user, setUser] = useState(getUser());
   const [recentEntries, setRecentEntries] = useState([]);
   const [entriesCount, setEntriesCount] = useState(0);
-  const [entryDates,setEntryDates] = useState([]);
+  const [entryDates, setEntryDates] = useState([]);
   const [goalsCount, setGoalsCount] = useState(0);
-  
-
-
 
   const [message, setMessage] = useState({
     title: "Thoughts for the day",
@@ -31,8 +29,6 @@ function HomePage() {
     isFavorite: false,
     createdAt: new Date().toISOString().split("T")[0], // Default to today
   });
-
-
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -67,21 +63,18 @@ function HomePage() {
     }
   };
 
-// useEffect to fetch goals count
-useEffect(()=>{
-  setUser(getUser());
-  async function getTotalNrGoals(){
-    const count = await getGoalCount();
-    console.log(count);
-    setGoalsCount(count.count);
-  }
-  getTotalNrGoals();
-},[]);
+  // useEffect to fetch goals count
+  useEffect(() => {
+    setUser(getUser());
+    async function getTotalNrGoals() {
+      const count = await getGoalCount();
+      console.log(count);
+      setGoalsCount(count.count);
+    }
+    getTotalNrGoals();
+  }, []);
 
-
-
-
-  useEffect(()=>{
+  useEffect(() => {
     setUser(getUser());
     // Fetch diary entry dates
     async function fetchDiaryEntryDates() {
@@ -91,9 +84,7 @@ useEffect(()=>{
     fetchDiaryEntryDates();
   }, []);
 
-
-
-// useEffect to fetch recent entries and entries count
+  // useEffect to fetch recent entries and entries count
   useEffect(() => {
     setUser(getUser());
     // Simulate fetching recent entries from the database
@@ -104,7 +95,6 @@ useEffect(()=>{
     fetchRecentEntries();
   }, []);
 
-
   useEffect(() => {
     setUser(getUser());
     // Simulate fetching entries count from the database
@@ -113,10 +103,7 @@ useEffect(()=>{
       setEntriesCount(count.count);
     }
     fetchEntriesCount();
-
   }, []);
-
-
 
   return (
     <>
@@ -172,7 +159,7 @@ useEffect(()=>{
                 {/* Recent Entries */}
                 <div className="grid-item recent-entries">
                   <h2>Your Recent Entries:</h2>
-                  {recentEntries? (
+                  {recentEntries ? (
                     <ul>
                       {recentEntries.map((entry, index) => (
                         <Link
@@ -197,15 +184,14 @@ useEffect(()=>{
                   )}
                 </div>
 
-              <div className="grid-item mood-tracker">
-                <AffirmationComponent />
-              </div>
-       
-    
+                <div className="grid-item mood-tracker">
+                  <AffirmationComponent />
+                </div>
+
                 {/* Achievements */}
                 <div className="grid-item achievements">
                   <h2>Your Achievements:</h2>
-                  <p>You've written  {entriesCount}  diary entries! 🌺</p>
+                  <p>You've written {entriesCount} diary entries! 🌺</p>
                   <p>You have set {goalsCount} goals! 🎯</p>
                 </div>
 
@@ -213,7 +199,7 @@ useEffect(()=>{
                 <div className="grid-item calendar-widget">
                   <h2>Your Journal Calendar:</h2>
                   {/* Placeholder for Calendar Component */}
-                  <CalendarComponent   entryDates={entryDates} />
+                  <CalendarComponent entryDates={entryDates} />
                 </div>
               </div>
             </>

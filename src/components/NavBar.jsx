@@ -61,8 +61,8 @@ function NavBar({ layout, handleLogOut }) {
               </Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/affirmations">
-                Affirmations
+              <Link className="nav-link" to="/manifestations">
+                Manifestations
               </Link>
             </li>
             <li className="nav-item">

@@ -9,7 +9,6 @@ const moods = [
   { emoji: "😌", label: "Relaxed", value: "relaxed" },
   { emoji: "😔", label: "Lonely", value: "lonely" },
   { emoji: "😰", label: "Anxious", value: "anxious" },
-
 ];
 
 const AffirmationComponent = () => {
@@ -72,17 +71,14 @@ const AffirmationComponent = () => {
         ))}
       </div>
       <div className="submit-btn">
-      <button
-        onClick={getAffirmation}
-        className="btn"
-        // onMouseOver={(e) => (e.target.style.backgroundColor = " #D9CCC5", e.target.style.color = "#000", e.target.style.fontWeight = "bold", e.target.style.border = "1px solid #BFA98E")}
-        // onMouseOut={(e) => (e.target.style.border = "1px solid #BFA98E")}
-      >
-        Get Affirmation
-      </button>
+        <button onClick={getAffirmation} className="btn">
+          Get Affirmation
+        </button>
       </div>
       {loading ? (
-        <p style={{ marginTop: "20px", fontSize: "1.2em", color: "#666" }}>Loading...</p>
+        <p style={{ marginTop: "20px", fontSize: "1.2em", color: "#666" }}>
+          Loading...
+        </p>
       ) : (
         <p
           style={{
@@ -99,7 +95,6 @@ const AffirmationComponent = () => {
       )}
     </div>
   );
-
 };
 
 export default AffirmationComponent;

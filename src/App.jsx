@@ -13,7 +13,7 @@ import SignUpForm from "./components/SignUpForm";
 import EntryPage from "./pages/EntryPage";
 import GoalsPage from "./pages/GoalsPage";
 import ProfilePage from "./pages/ProfilePage";
-import AffirmationPage from "./pages/AffirmationPage";
+import ManifestationPage from "./pages/ManifestationPage";
 
 import "./App.css";
 
@@ -34,7 +34,7 @@ function App() {
             <Route path="/profile" element={<ProfilePage />} />
             <Route path="/" element={<WelcomePage />} />
             <Route path="/entry/:id" element={<EntryPage />} />
-            <Route path="/affirmations" element={<AffirmationPage />} />
+            <Route path="/manifestations" element={<ManifestationPage />} />
           </Routes>
         </>
       ) : (
