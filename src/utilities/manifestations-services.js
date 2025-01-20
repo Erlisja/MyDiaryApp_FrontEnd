@@ -1,6 +1,6 @@
 import axios from "axios";
 // set up the base URL for the API
-const LOCAL_URL = 'https://Memoire-server.onrender.com';
+const LOCAL_URL = 'https://memoire-server.onrender.com';
 //const LOCAL_URL = 'http://localhost:3030';
 const API_URL = '/api/manifestations';
 const URL = LOCAL_URL + API_URL;
