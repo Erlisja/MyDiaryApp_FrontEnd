@@ -1,6 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { Link } from "react-router";
+import {PencilSquare, Trash3Fill,ChatRightDotsFill} from "react-bootstrap-icons"; // Import Bootstrap Icons
 
 function DiaryEntryCard({ entry, onDelete, onUpdate }) {
   const { title, content, tags, mood, isFavorite, createdAt } = entry;
@@ -93,13 +94,13 @@ function DiaryEntryCard({ entry, onDelete, onUpdate }) {
           <label>Mood:</label>
           <select name="mood" value={updatedEntry.mood} onChange={handleChange}>
             <option value="">Select Mood</option>
-            <option value="happy">😁 Happy</option>
-            <option value="love">😍 Loved</option>
-            <option value="excited">😃 Excited</option>
-            <option value="sad">😔 Sad</option>
-            <option value="angry">😡 Angry</option>
-            <option value="surprised">😲 Surprised</option>
-            <option value="neutral">😐 Neutral</option>
+            <option value="Happy 😁">😁 Happy</option>
+            <option value="Love 😍">😍 Loved</option>
+            <option value="Excited 😃">😃 Excited</option>
+            <option value="Sad 😔 ">😔 Sad</option>
+            <option value="Angry 😡">😡 Angry</option>
+            <option value="Surprised 😲">😲 Surprised</option>
+            <option value="Neutral 😐">😐 Neutral</option>
           </select>
           <br />
           <br />
@@ -131,7 +132,7 @@ function DiaryEntryCard({ entry, onDelete, onUpdate }) {
               handleEdit();
             }}
           >
-            Edit
+            <PencilSquare />
           </button>
           <button
             onClick={(e) => {
@@ -139,13 +140,13 @@ function DiaryEntryCard({ entry, onDelete, onUpdate }) {
               handleDelete(e);
             }}
           >
-            Delete
+            <Trash3Fill />
           </button>
             <Link
               to={`/entry/${entry._id}`}
               className="details-link"      
             >
-              View Details ...
+              <ChatRightDotsFill />
             </Link>
         </div>
       )}

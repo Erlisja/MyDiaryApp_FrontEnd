@@ -6,6 +6,7 @@ import {
   deleteManifestation,
 } from "../utilities/manifestations-services";
 import NavBar from "../components/NavBar";
+import {  Trash3Fill } from "react-bootstrap-icons";
 
 const ManifestationPage = () => {
   const [manifestations, setManifestations] = useState([]);
@@ -27,6 +28,7 @@ const ManifestationPage = () => {
 
   const handleGenerate = async () => {
     try {
+      if (!selectedCategory) return alert("Select a category to generate a manifestation!");
       const { manifestation } = await createGeneratedManifestation(
         selectedCategory
       );
@@ -138,7 +140,7 @@ const ManifestationPage = () => {
                       className="delete-btn"
                       onClick={() => handleDelete(m._id)}
                     >
-                      Delete
+                      <Trash3Fill />
                     </button>
                   </li>
                 ))}

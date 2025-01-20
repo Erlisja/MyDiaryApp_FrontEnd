@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Calendar from "react-calendar"; // Import the Calendar component
 import "react-calendar/dist/Calendar.css"; // Import the Calendar CSS - default calendar styling
 import NavBar from "../components/NavBar";
+import { VectorPen } from "react-bootstrap-icons";
 
 
 
@@ -71,8 +72,9 @@ function EntryPage() {
         </div>
         </div>
         <div className="content-box">
+       
           <p className="content-div">
-            <strong>Content:</strong> {entry.content}
+           <strong> <VectorPen/> Content:</strong> {entry.content}
           </p>
         </div>
         <p className="calendar-div">

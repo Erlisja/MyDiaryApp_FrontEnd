@@ -4,6 +4,7 @@ import diaryEntryService from "../utilities/diaryEntryService";
 import NavBar from "../components/NavBar";
 import Calendar from "react-calendar"; // Import the Calendar component
 import "react-calendar/dist/Calendar.css"; // Import the Calendar CSS - default calendar styling
+import { VectorPen, BookmarkHeart} from "react-bootstrap-icons";
 
 // Define the DailyDiaryPage component
 const DailyDiaryPage = () => {
@@ -65,9 +66,8 @@ const DailyDiaryPage = () => {
 
           {/* Form Layout */}
           <form className="entry-container" onSubmit={handleSubmit}>
-            {/* <div className="form-grid"> */}
+      
             {/* Calendar Component */}
-
             <div className="calendar-div">
               {formData.createdAt && (
                 <Calendar
@@ -104,7 +104,7 @@ const DailyDiaryPage = () => {
                 </select>
               </div>
               <div>
-                <label>Tags:</label>
+                <label> <BookmarkHeart/> Tags:</label>
                 <input
                   type="text"
                   name="tags"
@@ -129,7 +129,7 @@ const DailyDiaryPage = () => {
 
             {/* Content Textarea */}
             <div className="content-box">
-              <label>Content:</label>
+              <label><VectorPen/> Content:</label>
               <textarea
                 name="content"
                 value={formData.content}

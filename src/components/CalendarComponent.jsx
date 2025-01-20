@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css"; // Import calendar styles
+import { Link } from "react-router";
 
 function CalendarComponent({ entryDates }) {
   const [dateValues, setDateValues] = useState([]);
@@ -11,17 +12,29 @@ function CalendarComponent({ entryDates }) {
 
   const tileContent = ({ date, view }) => {
     // Check if the current date is in the entryDates array
-    const formattedDate = date.toISOString().split("T")[0]; 
-    if (dateValues.some((entryDate) => entryDate.toISOString().split("T")[0] === formattedDate)) {
-      return <div style={{ width: '5px', height: '5px', borderRadius: '50%', backgroundColor: 'red', margin: 'auto' }} />;
+    const formattedDate = date.toISOString().split("T")[0];
+    if (
+      dateValues.some(
+        (entryDate) => entryDate.toISOString().split("T")[0] === formattedDate
+      )
+    ) {
+      return (
+        <div
+          style={{
+            width: "5px",
+            height: "5px",
+            borderRadius: "50%",
+            backgroundColor: "red",
+            margin: "auto",
+          }}
+        />
+      );
     }
   };
 
   return (
     <div>
-      <Calendar
-        tileContent={tileContent}
-      />
+      <Calendar tileContent={tileContent} />
     </div>
   );
 }

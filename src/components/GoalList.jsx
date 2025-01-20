@@ -1,4 +1,5 @@
 import React from "react";
+import { Trash3, PencilSquare } from "react-bootstrap-icons";
 
 const GoalList = ({ goals, onEdit, onDelete }) => {
   return (
@@ -26,13 +27,13 @@ const GoalList = ({ goals, onEdit, onDelete }) => {
               {goal.status === "completed" ? "✅ Completed" : "⏳ In Progress"}
             </p>
             <button className="btn btn-primary" onClick={() => onEdit(goal)}>
-              Edit
+              <PencilSquare  />
             </button>
             <button
               className=" btn btn-secondary"
               onClick={() => onDelete(goal._id)}
             >
-              Delete
+              <Trash3 />
             </button>
           </div>
         ))

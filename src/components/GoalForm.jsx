@@ -6,22 +6,10 @@ const GoalForm = ({ onSubmit }) => {
     title: "",
     description: "",
     deadline: "",
-    priority: "Medium",
-    status: "incomplete",
+    priority: "",
+    status: "",
   });
 
-  // // Populate form if editing an existing goal
-  // useEffect(() => {
-  //   if (editGoal) {
-  //     setFormData({
-  //       title: editGoal.title,
-  //       description: editGoal.description,
-  //       deadline: editGoal.deadline,
-  //       priority: editGoal.priority,
-  //       status: editGoal.status,
-  //     });
-  //   }
-  // }, [editGoal]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -35,8 +23,8 @@ const GoalForm = ({ onSubmit }) => {
       title: "",
       description: "",
       deadline: "",
-      priority: "Medium",
-      status: "incomplete",
+      priority: "",
+      status: "",
     });
     setEditGoal(null); // Clear edit state
   };
@@ -79,6 +67,7 @@ const GoalForm = ({ onSubmit }) => {
             value={formData.priority}
             onChange={handleChange}
           >
+            <option value="">Select Priority</option>
             <option value="High">🔥 High</option>
             <option value="Medium">⚖️ Medium</option>
             <option value="Low">🌱 Low</option>
@@ -86,6 +75,7 @@ const GoalForm = ({ onSubmit }) => {
           <br />
           <label>Status:</label>
           <select name="status" value={formData.status} onChange={handleChange}>
+            <option value="">Select Status</option>
             <option value="completed">✅ Completed</option>
             <option value="incomplete">⏳ In Progress</option>
           </select>

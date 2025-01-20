@@ -158,9 +158,10 @@ const GoalsPage = () => {
             <div className="form-group">
               <label>Priority:</label>
               <select name="priority" defaultValue={currentGoal.priority} className="form-control">
-                <option value="High">High</option>
-                <option value="Medium">Medium</option>
-                <option value="Low">Low</option>
+              <option value="">Select Priority</option>
+            <option value="High">🔥 High</option>
+            <option value="Medium">⚖️ Medium</option>
+            <option value="Low">🌱 Low</option>
               </select>
             </div>
             <div className="form-group">
@@ -170,8 +171,9 @@ const GoalsPage = () => {
             <div className="form-group">
               <label>Status:</label>
               <select name="status" defaultValue={currentGoal.status} className="form-control">
-                <option value="completed">Completed</option>
-                <option value="incomplete">Incomplete</option>
+              <option value="">Select Status</option>
+              <option value="completed">✅ Completed</option>
+              <option value="incomplete">⏳ In Progress</option>
               </select>
             </div>
             <div className="modal-actions">

@@ -84,6 +84,8 @@ const ProfilePage = () => {
       setUser(updatedUser); // Update the user in state
       setIsEditing(false); // Close the edit form
       alert("Profile updated successfully!");
+  
+
 
       if (updatedUser.token) {
         localStorage.setItem("token", updatedUser.token); // Update token if it's returned
