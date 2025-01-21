@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 
+
 const GoalForm = ({ onSubmit }) => {
   const [editGoal, setEditGoal] = useState(null);
   const [formData, setFormData] = useState({
@@ -14,6 +15,7 @@ const GoalForm = ({ onSubmit }) => {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
+    
   };
 
   const handleSubmit = (e) => {

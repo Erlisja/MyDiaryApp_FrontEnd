@@ -84,8 +84,10 @@ const ProfilePage = () => {
       setUser(updatedUser); // Update the user in state
       setIsEditing(false); // Close the edit form
       alert("Profile updated successfully!");
-      //refresh the page
+      //rerender the page to show the updated user information
       window.location.reload();
+
+      
   
 
 

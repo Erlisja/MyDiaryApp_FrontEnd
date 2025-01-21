@@ -353,10 +353,9 @@ body {
   font-family: 'Bodoni Moda' serif;
   transition: color 0.3s ease;
 }
-.nav-item1 a{
-  word-spacing: 0 !important;
-  margin: 0 1rem;
-}
+
+
+
 
 .nav-item a:hover {
   color: var(--secondary-color);
@@ -1696,7 +1695,49 @@ ul.manifestation-list li:hover {
   font-family: 'Parisienne';
   text-align: center;
   color: var(--sixth-color);
-
-
-
 }
+
+
+
+/* ============= */
+/* src/components/Alert.css */
+.alert {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+  padding: 20px 30px;
+  border-radius: 5px;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  animation: slide-in 0.3s ease-in-out;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.alert-success {
+  background-color: #436245de;
+}
+
+.alert-error {
+  background-color: #f44336;
+}
+
+.alert-warning {
+  background-color: #ff9800;
+}
+
+.alert-info {
+  background-color: #2196f3;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+

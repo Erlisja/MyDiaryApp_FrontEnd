@@ -5,6 +5,7 @@ import NavBar from "../components/NavBar";
 import Calendar from "react-calendar"; // Import the Calendar component
 import "react-calendar/dist/Calendar.css"; // Import the Calendar CSS - default calendar styling
 import { VectorPen, BookmarkHeart} from "react-bootstrap-icons";
+import Alert from "../components/Alert"; // Import the Alert component
 
 // Define the DailyDiaryPage component
 const DailyDiaryPage = () => {
@@ -16,6 +17,14 @@ const DailyDiaryPage = () => {
     isFavorite: false,
     createdAt: new Date().toISOString().split("T")[0],
   });
+
+  const [alert, setAlert] = useState({ message: "", type: "" });
+
+  const showAlert = (message, type) => {
+    setAlert({ message, type });
+    setTimeout(() => setAlert({ message: "", type: "" }), 3000); // Clear the alert after 3 seconds
+  }
+
 
   // Define the handleChange function to update the form data
   const handleChange = (e) => {
@@ -30,6 +39,7 @@ const DailyDiaryPage = () => {
       const token = localStorage.getItem("token"); // Get the token from local storage
       if (!token) {
         console.error("No token found");
+        showAlert("No token found. Please log in.", "error");
         return;
       }
 
@@ -42,7 +52,7 @@ const DailyDiaryPage = () => {
 
       const response = await diaryEntryService.addDiaryEntry(diaryEntryData);
       console.log("Diary Entry Added:", response);
-      alert("Diary entry added successfully!");
+      showAlert("Diary entry added successfully!", "success");
       setFormData({
         title: "",
         content: "",
@@ -53,13 +63,18 @@ const DailyDiaryPage = () => {
       });
     } catch (error) {
       console.error("Error adding diary entry:", error);
-      alert("Error adding diary entry!");
+     showAlert("Failed to add diary entry. Please try again.", "error");
     }
   };
 
   return (
     <>
       <div className="entry-page-container">
+      <Alert
+        message={alert.message}
+        type={alert.type}
+        onClose={() => setAlert({ message: "", type: "" })}
+      />
         <NavBar layout="vertical" />
         <div className="entry-page">
           <h1 className="title">Add New Diary Entry</h1>

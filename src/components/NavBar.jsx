@@ -80,12 +80,12 @@ function NavBar({ layout, handleLogOut }) {
                 <PinMap /> Goals
               </Link>
             </li>
-            <li className="nav-item">
+            <li className="nav-item" >
               <Link className="nav-link" to="/profile">
                 <Person /> Profile
               </Link>
             </li>
-            <li className="nav-item1">
+            <li className="nav-item1" >
               <Link to="/login" className="nav-link" onClick={handleLogOut}>
                 <BoxArrowLeft /> Log Out
               </Link>

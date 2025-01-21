@@ -94,7 +94,7 @@ export async function updateGoalEntry(id, entryData) {
         if (!token) {
             throw new Error('No token found. Please log in.');
         }
-        const response = fetch(URL + `/${id}`, {
+        const response = await fetch(URL + `/${id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
