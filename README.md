@@ -271,7 +271,7 @@ The server is created using **Express.js**, with middleware for JSON parsing and
 
 The application is fully deployed, with the backend hosted on **Render** and the frontend hosted on **Vercel**. You can explore the live app using the link below:
 
-[Live App: Mémoire](https://Mémoire-rust.vercel.app/)
+[Live App: Mémoire](https://memoire-rust.vercel.app/)
 
 ### Backend Deployment on Render
 
