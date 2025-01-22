@@ -285,7 +285,7 @@ The frontend is deployed on **Vercel**, a platform optimized for React-based app
 
 The app includes the following deployments:
 
-- **Frontend**: [Mémoire on Vercel](https://Mémoire-rust.vercel.app/)
+- **Frontend**: [Mémoire on Vercel](https://memoire-rust.vercel.app/)
 - **Backend**: Hosted on Render (URL is configured within the frontend environment settings).
 
 This ensures the app is accessible and functional across devices, leveraging modern deployment strategies for a smooth user experience.
