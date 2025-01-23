@@ -14,11 +14,10 @@ function SignUpForm(props) {
   });
 
   const [error, setError] = useState(""); // set the error message to an empty string
-
+  const [isLoading, setIsLoading] = useState(false);
   const [isPopUpOpen, setIsPopUpOpen] = useState(false); // set the isPopUpOpen state to false to hide the pop up window
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value }); // this line of code is used to update the state of the form data when the user types in the input field
@@ -31,6 +30,7 @@ function SignUpForm(props) {
       setError("Passwords do not match");
       return;
     }
+    setIsLoading(true); // this line of code is used to set the isLoading state to true
 
     try {
       const submitData = { ...formData };
@@ -42,6 +42,8 @@ function SignUpForm(props) {
       setIsPopUpOpen(true); // this line of code is used to set the isPopUpOpen state to true to show the pop up window
     } catch (error) {
       setError("An error occurred.- Please try again"); // this line of code is used to set the error message when an error occurs
+    }finally {
+      setIsLoading(false); // this line of code is used to set the isLoading state to false
     }
   };
 
@@ -105,10 +107,9 @@ function SignUpForm(props) {
                 {showPassword ? <Eye /> : <EyeSlash />} {/* Icons */}
               </button>
             </div>
-            <br /> 
+            <br />
             <label for="password">Confirm Password</label>
             <div className="password-container">
-             
               <br />
               <input
                 type={showConfirmPassword ? "text" : "password"}
@@ -132,7 +133,12 @@ function SignUpForm(props) {
 
             <br />
             <br />
-            <button type="submit">Sign Up</button>
+            <button
+             type="submit"
+             disabled={isLoading}
+             >
+              {isLoading ? "Loading..." : "Sign Up"}
+              </button>
             <br />
           </form>
           {/* Render Popup */}
