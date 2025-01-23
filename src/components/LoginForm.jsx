@@ -13,6 +13,7 @@ function LoginForm({ setUser }) {
   const [error, setError] = useState(""); // set the error message to an empty string
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   // create a function to handle the form data
   const handleChange = (e) => {
@@ -25,15 +26,18 @@ function LoginForm({ setUser }) {
     e.preventDefault();
     // console.log(formData);
     const credentials = { ...formData };
-    console.log(credentials);
+    setIsLoading(true);
+    // console.log(credentials);
     try {
       // call the login function from the userServices file
       const user = await userServices.login(credentials);
-      console.log("the user is:", user);
+      // console.log("the user is:", user);
       setUser(user); // set the user state to the user object
       navigate("/home");
     } catch (err) {
-      setError("login failed");
+      setError("Invalid Credentials. Please try again.");
+    }finally {
+      setIsLoading(false);
     }
   }
 
@@ -93,7 +97,10 @@ function LoginForm({ setUser }) {
 
             <br />
             <br />
-            <button type="submit">Log In</button>
+            <button
+             type="submit" 
+             disabled={isLoading}
+            >{isLoading ? "Signing in.." : "Sign In"}</button>
           </form>
           <p>{error}</p>
         </div>

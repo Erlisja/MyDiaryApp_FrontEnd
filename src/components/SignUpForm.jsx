@@ -2,10 +2,9 @@ import { signUpUser } from "../utilities/users-services";
 import { useState } from "react";
 import { useNavigate } from "react-router";
 import PopUpWindow from "./PopUpWindow";
-import { Eye, EyeSlash } from "react-bootstrap-icons"; // Import Bootstrap Icons
+import { Eye, EyeSlash } from "react-bootstrap-icons";
 
 function SignUpForm(props) {
-  //  create a state to store the form data
   const [formData, setFormData] = useState({
     username: "",
     email: "",
@@ -13,48 +12,74 @@ function SignUpForm(props) {
     confirmPassword: "",
   });
 
-  const [error, setError] = useState(""); // set the error message to an empty string
+  const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const [isPopUpOpen, setIsPopUpOpen] = useState(false); // set the isPopUpOpen state to false to hide the pop up window
+  const [isPopUpOpen, setIsPopUpOpen] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  
+
+  const [passwordChecks, setPasswordChecks] = useState({
+    length: false,
+    uppercase: false,
+    number: false,
+    specialChar: false,
+  });
+
+  const [confirmPasswordChecks, setConfirmPasswordChecks] = useState({
+    length: false,
+    uppercase: false,
+    number: false,
+    specialChar: false,
+  });
+
+  const validatePassword = (password) => ({
+    length: password.length >= 6,
+    uppercase: /(?=.*[A-Z])/.test(password),
+    number: /(?=.*\d)/.test(password),
+    specialChar: /(?=.*[!@#$%^&*])/.test(password),
+  });
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value }); // this line of code is used to update the state of the form data when the user types in the input field
-    setError(""); // this line of code is used to clear the error message when the user types in the input field
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+    setError("");
+
+    if (name === "password") {
+      setPasswordChecks(validatePassword(value));
+    } else if (name === "confirmPassword") {
+      setConfirmPasswordChecks(validatePassword(value));
+    }
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault(); // prevents the default reload of the page when the form is submitted
+    e.preventDefault();
     if (formData.password !== formData.confirmPassword) {
       setError("Passwords do not match");
       return;
     }
-    setIsLoading(true); // this line of code is used to set the isLoading state to true
+
+    setIsLoading(true);
 
     try {
       const submitData = { ...formData };
-      delete formData.confirmPassword; // deletes the confirmPassword key from the form data, so that it is not sent to the server
-      console.log(submitData);
-      const user = await signUpUser(submitData); // this line of code is used to call the signUpUser function from the users-api file
-      props.setUser(user); // this line of code is used to set the user state to the user object returned by the signUpUser function
-      // Show pop up window
-      setIsPopUpOpen(true); // this line of code is used to set the isPopUpOpen state to true to show the pop up window
+      delete submitData.confirmPassword;
+      const user = await signUpUser(submitData); // Call the signUpUser function from the users-services file
+      props.setUser(user); // Set the user state to the user object
+      setIsPopUpOpen(true); // Open the pop-up window
     } catch (error) {
-      setError("An error occurred.- Please try again"); // this line of code is used to set the error message when an error occurs
-    }finally {
-      setIsLoading(false); // this line of code is used to set the isLoading state to false
+      setError("An error occurred. Please try again.");
+    } finally {
+      setIsLoading(false);
     }
   };
 
   const navigate = useNavigate();
-  function handleBack() {
-    navigate("/");
-  }
+  const handleBack = () => navigate("/");
 
-  const togglePasswordVisibility = () => {
-    setShowPassword(!showPassword);
-  };
+  const togglePasswordVisibility = () => setShowPassword(!showPassword);
+  const toggleConfirmPasswordVisibility = () =>
+    setShowConfirmPassword(!showConfirmPassword);
 
   return (
     <>
@@ -63,10 +88,10 @@ function SignUpForm(props) {
           <button className="auth-back-arrow" onClick={handleBack}>
             ⬅︎
           </button>
-          <h2>Sign Up </h2>
+          <h2>Sign Up</h2>
 
           <form autoComplete="off" onSubmit={handleSubmit}>
-            <label for="username">Username</label>
+            <label htmlFor="username">Username</label>
             <input
               type="text"
               name="username"
@@ -76,7 +101,7 @@ function SignUpForm(props) {
               required
             />
             <br />
-            <label for="email">Email</label>
+            <label htmlFor="email">Email</label>
             <input
               type="email"
               name="email"
@@ -86,67 +111,100 @@ function SignUpForm(props) {
               required
             />
             <br />
-            <label for="password">Password</label>
-            <div className=" password-container">
+            <label htmlFor="password">Password</label>
+            <div className="password-container">
               <input
                 type={showPassword ? "text" : "password"}
                 name="password"
                 value={formData.password}
                 onChange={handleChange}
                 placeholder="Enter your password"
-                minLength={4}
+                minLength={6}
                 required
               />
               <button
                 type="button"
-                id="togglePassword"
                 aria-label="Toggle password visibility"
                 onClick={togglePasswordVisibility}
                 className="password-toggle-btn"
               >
-                {showPassword ? <Eye /> : <EyeSlash />} {/* Icons */}
+                {showPassword ? <Eye /> : <EyeSlash />}
               </button>
             </div>
+            {formData.password && (
+              <ul className="password-checklist">
+                <li className={passwordChecks.length ? "valid" : "invalid"}>
+                  At least 6 characters
+                </li>
+                <li className={passwordChecks.uppercase ? "valid" : "invalid"}>
+                  At least one uppercase letter
+                </li>
+                <li className={passwordChecks.number ? "valid" : "invalid"}>
+                  At least one number
+                </li>
+                <li
+                  className={passwordChecks.specialChar ? "valid" : "invalid"}
+                >
+                  At least one special character (!@#$%^&*)
+                </li>
+              </ul>
+            )}
             <br />
-            <label for="password">Confirm Password</label>
+            <label htmlFor="confirmPassword">Confirm Password</label>
             <div className="password-container">
-              <br />
               <input
                 type={showConfirmPassword ? "text" : "password"}
                 name="confirmPassword"
                 value={formData.confirmPassword}
                 onChange={handleChange}
                 placeholder="Confirm your password"
-                minLength={4}
+                minLength={6}
                 required
               />
               <button
                 type="button"
-                id="togglePassword1"
-                aria-label="Toggle password visibility"
-                onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                aria-label="Toggle confirm password visibility"
+                onClick={toggleConfirmPasswordVisibility}
                 className="password-toggle-btn"
               >
-                {showConfirmPassword ? <Eye /> : <EyeSlash />} {/* Icons */}
+                {showConfirmPassword ? <Eye /> : <EyeSlash />}
               </button>
             </div>
-
+            {formData.confirmPassword && (
+              <ul className="password-checklist">
+                <li
+                  className={confirmPasswordChecks.length ? "valid" : "invalid"}
+                >
+                  At least 6 characters
+                </li>
+                <li
+                  className={
+                    confirmPasswordChecks.uppercase ? "valid" : "invalid"
+                  }
+                >
+                  At least one uppercase letter
+                </li>
+                <li
+                  className={confirmPasswordChecks.number ? "valid" : "invalid"}
+                >
+                  At least one number
+                </li>
+                <li
+                  className={
+                    confirmPasswordChecks.specialChar ? "valid" : "invalid"
+                  }
+                >
+                  At least one special character (!@#$%^&*)
+                </li>
+              </ul>
+            )}
             <br />
-            <br />
-            <button
-             type="submit"
-             disabled={isLoading}
-             >
+            <button type="submit" disabled={isLoading}>
               {isLoading ? "Loading..." : "Sign Up"}
-              </button>
-            <br />
+            </button>
           </form>
-          {/* Render Popup */}
           {isPopUpOpen && (
-            <PopUpWindow
-              message="Sign up successful! 
-           You can now log in with your credentials."
-            /> // this line of code is used to render the PopUpWindow component when the isPopUpOpen state is true
+            <PopUpWindow message="Sign up successful! You can now log in with your credentials." />
           )}
           <p>{error}</p>
         </div>

@@ -1741,3 +1741,26 @@ ul.manifestation-list li:hover {
   cursor: pointer;
 }
 
+.password-checklist {
+  list-style:decimal;
+  line-height: 0vmin;
+  
+  text-align: left;
+
+  
+  padding: 0;
+  margin: 0;
+  font-size: 0.7rem;
+}
+
+.password-checklist li {
+  margin-bottom: 5px;
+}
+
+.password-checklist .valid {
+  color: green;
+}
+
+.password-checklist .invalid {
+  color: red;
+}
