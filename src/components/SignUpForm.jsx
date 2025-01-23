@@ -17,6 +17,7 @@ function SignUpForm(props) {
 
   const [isPopUpOpen, setIsPopUpOpen] = useState(false); // set the isPopUpOpen state to false to hide the pop up window
   const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
 
   const handleChange = (e) => {
@@ -91,6 +92,7 @@ function SignUpForm(props) {
                 value={formData.password}
                 onChange={handleChange}
                 placeholder="Enter your password"
+                minLength={4}
                 required
               />
               <button
@@ -109,7 +111,7 @@ function SignUpForm(props) {
              
               <br />
               <input
-                type="password"
+                type={showConfirmPassword ? "text" : "password"}
                 name="confirmPassword"
                 value={formData.confirmPassword}
                 onChange={handleChange}
@@ -119,12 +121,12 @@ function SignUpForm(props) {
               />
               <button
                 type="button"
-                id="togglePassword"
+                id="togglePassword1"
                 aria-label="Toggle password visibility"
-                onClick={togglePasswordVisibility}
+                onClick={() => setShowConfirmPassword(!showConfirmPassword)}
                 className="password-toggle-btn"
               >
-                {showPassword ? <Eye /> : <EyeSlash />} {/* Icons */}
+                {showConfirmPassword ? <Eye /> : <EyeSlash />} {/* Icons */}
               </button>
             </div>
 

@@ -6,6 +6,8 @@ import { Eye, EyeSlash } from "react-bootstrap-icons"; // Import Bootstrap Icons
 
 const ProfilePage = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [showCurrentPassword, setShowCurrentPassword] = useState(false);
   const [user, setUser] = useState({ username: "", email: "" });
   const [isEditing, setIsEditing] = useState(false);
   const [formData, setFormData] = useState({
@@ -87,10 +89,6 @@ const ProfilePage = () => {
       //rerender the page to show the updated user information
       window.location.reload();
 
-      
-  
-
-
       if (updatedUser.token) {
         localStorage.setItem("token", updatedUser.token); // Update token if it's returned
       }
@@ -106,10 +104,10 @@ const ProfilePage = () => {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  // Toggle password visibility
-  const togglePasswordVisibility = () => {
-    setShowPassword(!showPassword);
-  };
+  // // Toggle password visibility
+  // const togglePasswordVisibility = () => {
+  //   setShowPassword(!showPassword);
+  // };
 
   return (
     <>
@@ -159,7 +157,7 @@ const ProfilePage = () => {
                 <label>Current Password: </label>
                 <div className="password-container1">
                   <input
-                    type="password"
+                    type={showCurrentPassword ? "text" : "password"}
                     name="currentPassword"
                     value={formData.currentPassword}
                     onChange={handleChange}
@@ -169,10 +167,10 @@ const ProfilePage = () => {
                     type="button"
                     id="togglePassword"
                     aria-label="Toggle password visibility"
-                    onClick={togglePasswordVisibility}
+                    onClick={()=>{setShowCurrentPassword(!showCurrentPassword)}}
                     className="password-toggle-btn"
                   >
-                    {showPassword ? <Eye /> : <EyeSlash />} {/* Icons */}
+                    {showCurrentPassword ? <Eye /> : <EyeSlash />} {/* Icons */}
                   </button>
                 </div>
                 <label>New Password: </label>
@@ -188,7 +186,7 @@ const ProfilePage = () => {
                     type="button"
                     id="togglePassword"
                     aria-label="Toggle password visibility"
-                    onClick={togglePasswordVisibility}
+                    onClick={()=>{setShowPassword(!showPassword)}}
                     className="password-toggle-btn"
                   >
                     {showPassword ? <Eye /> : <EyeSlash />} {/* Icons */}
@@ -198,7 +196,7 @@ const ProfilePage = () => {
                 <label>Confirm New Password: </label>
                 <div className="password-container1">
                   <input
-                    type="password"
+                    type={showConfirmPassword ? "text" : "password"}
                     name="confirmNewPassword"
                     placeholder="Confirm new password"
                     onChange={handleChange}
@@ -208,7 +206,7 @@ const ProfilePage = () => {
                     type="button"
                     id="togglePassword"
                     aria-label="Toggle password visibility"
-                    onClick={togglePasswordVisibility}
+                    onClick={()=>{setShowConfirmPassword(!showConfirmPassword)}}
                     className="password-toggle-btn"
                   >
                     {showPassword ? <Eye /> : <EyeSlash />} {/* Icons */}
